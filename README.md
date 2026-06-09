@@ -8,7 +8,8 @@ Aplicația este o platformă de cursuri online (similară cu Udemy/Coursera) car
 ---
 
 ## 2. Diagrama ERD (Entity-Relationship Diagram)
-<img width="1237" height="615" alt="image" src="https://github.com/user-attachments/assets/101b68b0-d1d8-4436-bd2c-4f5009446d67" />
+<img width="790" height="545" alt="image" src="https://github.com/user-attachments/assets/0923c261-2494-4de1-883b-fac450d72de4" />
+
 
 ---
 
