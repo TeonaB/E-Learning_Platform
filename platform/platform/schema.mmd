@@ -1,0 +1,54 @@
+erDiagram
+    USER {
+        Long id PK
+        String username
+        String email
+        String password
+        Role role "ENUM: USER, ADMIN"
+    }
+    USER_PROFILE {
+        Long id PK
+        Long user_id FK
+        String firstName "maps to: first_name"
+        String lastName "maps to: last_name"
+        String phoneNumber "maps to: phone_number"
+    }
+    CATEGORY {
+        Long id PK
+        String name
+        String description
+    }
+    COURSE {
+        Long id PK
+        Long category_id FK
+        String title
+        String description
+    }
+    LESSON {
+        Long id PK
+        Long course_id FK
+        String title
+        String content_url "snake_case in DB"
+        Integer duration_minutes "snake_case in DB"
+    }
+    USER_COURSE{
+        Long user_id FK
+        Long course_id FK
+    }
+    REVIEW {
+        Long id PK
+        Long user_id FK
+        Long course_id FK
+        Integer rating
+        String comment
+    }
+
+    USER ||--|| USER_PROFILE : ""
+    CATEGORY ||--o{ COURSE : ""
+    COURSE ||--o{ LESSON : ""
+
+    USER ||--o{ USER_COURSE : ""
+    COURSE ||--o{ USER_COURSE : ""
+
+    USER ||--o{ REVIEW : ""
+    COURSE ||--o{ REVIEW : ""
