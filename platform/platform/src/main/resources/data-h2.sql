@@ -1,5 +1,5 @@
 
-INSERT INTO user (username, email, password, role) VALUES
+INSERT INTO app_user (username, email, password, role) VALUES
                                                         ('admin', 'admin@elearning.com', 'admin123', 'ADMIN'),
                                                         ('teona', 'teona@student.com', 'parola123', 'USER'),
                                                         ('andrei', 'andrei@student.com', 'student456', 'USER');

@@ -24,7 +24,7 @@ public class Course {
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 
-    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
     @ToString.Exclude
     private List<Lesson> lessons = new ArrayList<>();
 
@@ -32,7 +32,7 @@ public class Course {
     @ToString.Exclude
     private List<User> users = new ArrayList<>();
 
-    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
     @ToString.Exclude
     private List<Review> reviews = new ArrayList<>();
 }

@@ -8,6 +8,7 @@ import java.util.List;
 
 @Data
 @Entity
+@Table(name = "app_user")
 public class User {
 
     @Id
@@ -33,9 +34,9 @@ public class User {
 
     @ManyToMany
     @JoinTable(
-            name = "user_course", // numele tabelei din baza de date
-            joinColumns = @JoinColumn(name = "user_id"), // cheia către User
-            inverseJoinColumns = @JoinColumn(name = "course_id") // cheia către Course
+            name = "user_course",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "course_id")
     )
     @ToString.Exclude
     private List<Course> courses = new ArrayList<>();

@@ -7,7 +7,7 @@ DROP TABLE IF EXISTS review;
 DROP TABLE IF EXISTS user_course;
 
 -- 1. Tabela Users
-CREATE TABLE user (
+CREATE TABLE app_user (
                       id BIGINT AUTO_INCREMENT PRIMARY KEY,
                       username VARCHAR(50) NOT NULL UNIQUE,
                       email VARCHAR(100) NOT NULL UNIQUE,
@@ -17,12 +17,12 @@ CREATE TABLE user (
 
 -- 2. Tabela User Profiles
 CREATE TABLE user_profile (
-                              id BIGINT AUTO_INCREMENT PRIMARY KEY,
-                              user_id BIGINT NOT NULL,
-                              first_name VARCHAR(50),
-                              last_name VARCHAR(50),
-                              phone_number VARCHAR(20),
-                              FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE
+                               id BIGINT AUTO_INCREMENT PRIMARY KEY,
+                               user_id BIGINT NOT NULL UNIQUE,
+                               first_name VARCHAR(50),
+                               last_name VARCHAR(50),
+                               phone_number VARCHAR(20),
+                               FOREIGN KEY (user_id) REFERENCES app_user(id) ON DELETE CASCADE
 );
 
 -- 3. Tabela Categories
@@ -58,7 +58,7 @@ CREATE TABLE review (
                         course_id BIGINT NOT NULL,
                         rating INT NOT NULL,
                         comment TEXT,
-                        FOREIGN KEY (user_id) REFERENCES user(id),
+                        FOREIGN KEY (user_id) REFERENCES app_user(id),
                         FOREIGN KEY (course_id) REFERENCES course(id)
 );
 
@@ -67,6 +67,6 @@ CREATE TABLE user_course (
                              user_id BIGINT NOT NULL,
                              course_id BIGINT NOT NULL,
                              PRIMARY KEY (user_id, course_id),
-                             FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE,
+                             FOREIGN KEY (user_id) REFERENCES app_user(id) ON DELETE CASCADE,
                              FOREIGN KEY (course_id) REFERENCES course(id) ON DELETE CASCADE
 );
