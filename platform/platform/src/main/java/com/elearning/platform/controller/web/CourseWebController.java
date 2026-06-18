@@ -14,6 +14,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import com.elearning.platform.service.interf.UserService;
+
 import java.util.List;
 
 @Controller
@@ -23,6 +25,7 @@ public class CourseWebController {
 
     private final CourseService courseService;
     private final CategoryService categoryService;
+    private final UserService userService;
 
     // ADMIN: View courses list
     @GetMapping("/admin/courses")
@@ -114,6 +117,18 @@ public class CourseWebController {
         }
         courseService.deleteCourse(id);
         return "redirect:/web/admin/courses";
+    }
+
+    // USER: View enrolled courses
+    @GetMapping("/courses/my-courses")
+    public String myCourses(Model model, HttpSession session) {
+        User user = (User) session.getAttribute("currentUser");
+        if (user == null) {
+            return "redirect:/web/auth/login";
+        }
+        List<Course> myCourses = userService.getUserCourses(user.getId());
+        model.addAttribute("courses", myCourses);
+        return "course/my-courses";
     }
 
     // USER: Enroll in course

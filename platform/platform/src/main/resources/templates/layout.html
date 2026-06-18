@@ -9,6 +9,8 @@
     <!-- Webjars Bootstrap & FontAwesome -->
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.min.css}">
+    <!-- CDN Fallback for FontAwesome to ensure icons are always loaded -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     
     <style>
         body {
@@ -74,7 +76,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarContent">
-                <ul class="navbar-collapse navbar-nav me-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/web/home}"><i class="fa-solid fa-house me-1"></i> Catalog</a>
                     </li>
@@ -99,17 +101,16 @@
                 </ul>
                 
                 <!-- Auth Section -->
-                <div class="d-flex align-items-center gap-2">
+                <div class="d-flex align-items-center gap-2 ms-lg-auto">
                     <th:block th:if="${session.currentUser == null}">
-                        <a th:href="@{/web/auth/login}" class="btn btn-outline-light px-4 rounded-pill">Conectare</a>
-                        <a th:href="@{/web/auth/register}" class="btn btn-warning text-dark fw-bold px-4 rounded-pill">Înregistrare</a>
+                        <a th:href="@{/web/auth/login}" class="btn btn-warning px-4 rounded-pill text-dark fw-bold shadow-sm" style="color: #1e293b !important; background-color: #ffc107 !important; border-color: #ffc107 !important;">Conectare</a>
+                        <a th:href="@{/web/auth/register}" class="btn btn-warning px-4 rounded-pill text-dark fw-bold shadow-sm" style="color: #1e293b !important; background-color: #ffc107 !important; border-color: #ffc107 !important;">Înregistrare</a>
                     </th:block>
                     <th:block th:if="${session.currentUser != null}">
                         <span class="text-white me-2">
                             Salut, <strong th:text="${session.currentUser.username}">Student</strong>
-                            <span class="badge bg-warning text-dark ms-1" th:text="${session.currentUser.role}">Role</span>
                         </span>
-                        <a th:href="@{/web/auth/logout}" class="btn btn-danger btn-sm rounded-pill px-3"><i class="fa-solid fa-right-from-bracket"></i> Ieșire</a>
+                        <a th:href="@{/web/auth/logout}" class="btn btn-warning btn-sm rounded-pill px-3 text-dark fw-bold shadow-sm" style="color: #1e293b !important; background-color: #ffc107 !important; border-color: #ffc107 !important;"><i class="fa-solid fa-right-from-bracket me-1"></i> Deconectare</a>
                     </th:block>
                 </div>
             </div>
@@ -125,7 +126,6 @@
     <footer class="py-4 border-top border-secondary">
         <div class="container text-center">
             <p class="mb-1">&copy; 2026 EduPlatform E-Learning Inc. Toate drepturile rezervate.</p>
-            <small class="text-muted">Proiect realizat cu Spring Boot, JPA, Thymeleaf și Bootstrap.</small>
         </div>
     </footer>
 

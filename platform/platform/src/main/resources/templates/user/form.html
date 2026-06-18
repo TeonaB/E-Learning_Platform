@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::main})}">
+<body>
+<main class="d-flex align-items-center justify-content-center">
+    <div class="card card-custom p-4 shadow-sm" style="max-width: 600px; width: 100%;">
+        <div class="mb-4">
+            <h3 class="fw-bold text-primary">
+                <span th:if="${userId == null}"><i class="fa-solid fa-user-plus me-2"></i>Adaugă Utilizator</span>
+                <span th:if="${userId != null}"><i class="fa-solid fa-user-pen me-2"></i>Editează Utilizator</span>
+            </h3>
+            <p class="text-secondary small">Introduceți datele contului și atribuiți rolul corespunzător</p>
+        </div>
+
+        <!-- Error Alert -->
+        <div th:if="${saveError}" class="alert alert-danger py-2" role="alert">
+            <i class="fa-solid fa-circle-xmark me-2"></i>
+            <span th:text="${saveError}">Eroare salvare</span>
+        </div>
+
+        <form th:action="@{/web/admin/users/save}" th:object="${user}" method="post">
+            <!-- Hidden inputs -->
+            <input type="hidden" name="userId" th:value="${userId}" th:if="${userId != null}" />
+
+            <!-- Username -->
+            <div class="mb-3">
+                <label for="username" class="form-label fw-bold">Nume Utilizator</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
+                    <input type="text" class="form-control" id="username" th:field="*{username}" 
+                           placeholder="Ex: ionpopescu" required>
+                </div>
+                <div class="text-danger small mt-1" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">
+                    Numele de utilizator este obligatoriu.
+                </div>
+            </div>
+
+            <!-- Email -->
+            <div class="mb-3">
+                <label for="email" class="form-label fw-bold">Adresă Email</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fa-solid fa-envelope"></i></span>
+                    <input type="email" class="form-control" id="email" th:field="*{email}" 
+                           placeholder="Ex: ion.popescu@gmail.com" required>
+                </div>
+                <div class="text-danger small mt-1" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">
+                    Email-ul este invalid.
+                </div>
+            </div>
+
+            <!-- Password -->
+            <div class="mb-3">
+                <label for="password" class="form-label fw-bold">
+                    Parolă 
+                    <span th:if="${userId != null}" class="text-muted fw-normal">(introduceți parola curentă sau o nouă parolă)</span>
+                </label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
+                    <input type="password" class="form-control" id="password" th:field="*{password}" 
+                           placeholder="Parolă securizată..." th:required="${userId == null}">
+                </div>
+                <div class="text-danger small mt-1" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">
+                    Parola este obligatorie.
+                </div>
+            </div>
+
+            <!-- Role Selection -->
+            <div class="mb-4">
+                <label for="role" class="form-label fw-bold">Rol Utilizator</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fa-solid fa-shield-halved"></i></span>
+                    <select class="form-select" id="role" th:field="*{role}" required>
+                        <option value="" disabled selected>Selectează un rol...</option>
+                        <option th:each="r : ${roles}" th:value="${r}" th:text="${r}"></option>
+                    </select>
+                </div>
+                <div class="text-danger small mt-1" th:if="${#fields.hasErrors('role')}" th:errors="*{role}">
+                    Rolul este obligatoriu.
+                </div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="d-flex justify-content-end gap-2">
+                <a th:href="@{/web/admin/users}" class="btn btn-outline-secondary rounded-pill px-4">Anulează</a>
+                <button type="submit" class="btn btn-primary rounded-pill px-4">Salvează</button>
+            </div>
+        </form>
+    </div>
+</main>
+</body>
+</html>

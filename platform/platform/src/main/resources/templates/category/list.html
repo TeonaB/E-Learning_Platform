@@ -31,15 +31,15 @@
                         <td class="text-center">
                             <div class="d-flex justify-content-center gap-2">
                                 <a th:href="@{/web/admin/categories/edit/{id}(id=${cat.id})}" 
-                                   class="btn btn-outline-secondary btn-sm rounded-circle" 
-                                   title="Editează" style="width: 36px; height: 36px; display: inline-flex; align-items: center; justify-content: center;">
+                                   class="btn btn-primary btn-sm px-3 rounded-pill text-white d-inline-flex align-items-center gap-1">
                                     <i class="fa-solid fa-pen"></i>
+                                    <span>Editează</span>
                                 </a>
                                 <a th:href="@{/web/admin/categories/delete/{id}(id=${cat.id})}" 
-                                   class="btn btn-outline-danger btn-sm rounded-circle"
-                                   onclick="return confirm('Sigur doriți să ștergeți această categorie? Toate cursurile asociate vor fi șterse sau afectate.');"
-                                   title="Șterge" style="width: 36px; height: 36px; display: inline-flex; align-items: center; justify-content: center;">
+                                   class="btn btn-danger btn-sm px-3 rounded-pill text-white d-inline-flex align-items-center gap-1"
+                                   onclick="return confirm('Sigur doriți să ștergeți această categorie? Toate cursurile asociate vor fi șterse sau afectate.');">
                                     <i class="fa-solid fa-trash"></i>
+                                    <span>Șterge</span>
                                 </a>
                             </div>
                         </td>

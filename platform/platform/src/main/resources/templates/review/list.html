@@ -40,9 +40,12 @@
                             <span class="badge bg-light text-primary border" th:text="${review.course.title}">Course Title</span>
                         </td>
                         <td>
-                            <div class="text-warning">
-                                <span th:each="i : ${#numbers.sequence(1, review.rating)}"><i class="fa-solid fa-star"></i></span>
-                                <span th:if="${review.rating < 5}" th:each="i : ${#numbers.sequence(1, 5 - review.rating)}"><i class="fa-regular fa-star text-muted"></i></span>
+                            <div class="d-flex align-items-center gap-2">
+                                <span class="fw-bold text-dark" th:text="${review.rating} + ' / 5'">5 / 5</span>
+                                <span class="text-warning d-none d-sm-inline">
+                                    <span th:if="${review.rating > 0}" th:each="i : ${#numbers.sequence(1, review.rating)}"><i class="fa-solid fa-star"></i></span>
+                                    <span th:if="${review.rating < 5}" th:each="i : ${#numbers.sequence(1, 5 - review.rating)}"><i class="fa-regular fa-star text-muted"></i></span>
+                                </span>
                             </div>
                         </td>
                         <td>
@@ -50,11 +53,10 @@
                         </td>
                         <td class="text-center">
                             <a th:href="@{/web/admin/reviews/delete/{id}(id=${review.id})}" 
-                               class="btn btn-outline-danger btn-sm rounded-circle"
-                               onclick="return confirm('Sigur doriți să ștergeți această recenzie?');"
-                               style="width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center;"
-                               title="Șterge recenzie">
+                               class="btn btn-danger btn-sm px-3 rounded-pill text-white d-inline-flex align-items-center gap-1"
+                               onclick="return confirm('Sigur doriți să ștergeți această recenzie?');">
                                 <i class="fa-solid fa-trash"></i>
+                                <span>Șterge</span>
                             </a>
                         </td>
                     </tr>

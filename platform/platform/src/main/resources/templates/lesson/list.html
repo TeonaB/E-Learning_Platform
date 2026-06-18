@@ -44,12 +44,14 @@
                         
                         <!-- ADMIN Controls -->
                         <div th:if="${session.currentUser != null && session.currentUser.role.name() == 'ADMIN'}" class="d-flex gap-2">
-                            <a th:href="@{/web/admin/lessons/edit/{id}(id=${lesson.id})}" class="btn btn-outline-secondary btn-sm rounded-circle" style="width:32px; height:32px; display:inline-flex; align-items:center; justify-content:center;">
+                            <a th:href="@{/web/admin/lessons/edit/{id}(id=${lesson.id})}" class="btn btn-primary btn-sm px-3 rounded-pill text-white d-inline-flex align-items-center gap-1">
                                 <i class="fa-solid fa-pen"></i>
+                                <span>Editează</span>
                             </a>
-                            <a th:href="@{/web/admin/lessons/delete/{id}(id=${lesson.id})}" class="btn btn-outline-danger btn-sm rounded-circle" 
-                               onclick="return confirm('Sigur doriți să ștergeți această lecție?');" style="width:32px; height:32px; display:inline-flex; align-items:center; justify-content:center;">
+                            <a th:href="@{/web/admin/lessons/delete/{id}(id=${lesson.id})}" class="btn btn-danger btn-sm px-3 rounded-pill text-white d-inline-flex align-items-center gap-1" 
+                               onclick="return confirm('Sigur doriți să ștergeți această lecție?');">
                                 <i class="fa-solid fa-trash"></i>
+                                <span>Șterge</span>
                             </a>
                         </div>
                     </div>
@@ -61,11 +63,19 @@
         <div class="col-lg-4">
             <!-- Review Action -->
             <div class="card card-custom p-4 shadow-sm mb-4 text-center" th:if="${session.currentUser != null && session.currentUser.role.name() == 'USER'}">
-                <h5 class="fw-bold mb-2 text-primary">Îți place acest curs?</h5>
-                <p class="text-secondary small">Spune-ne părerea ta lăsând o recenzie!</p>
-                <a th:href="@{/web/reviews/create/{courseId}(courseId=${course.id})}" class="btn btn-warning text-dark fw-bold rounded-pill w-full">
-                    <i class="fa-solid fa-star me-1"></i> Scrie o Recenzie
-                </a>
+                <div th:with="userReviews=${course.reviews.?[user.id == __${session.currentUser.id}__]}">
+                    <div th:if="${userReviews.isEmpty()}">
+                        <h5 class="fw-bold mb-2 text-primary">Îți place acest curs?</h5>
+                        <p class="text-secondary small">Spune-ne părerea ta lăsând o recenzie!</p>
+                        <a th:href="@{/web/reviews/create/{courseId}(courseId=${course.id})}" class="btn btn-warning text-dark fw-bold rounded-pill w-100">
+                            <i class="fa-solid fa-star me-1"></i> Scrie o Recenzie
+                        </a>
+                    </div>
+                    <div th:if="${!userReviews.isEmpty()}">
+                        <h5 class="fw-bold mb-2 text-success"><i class="fa-solid fa-circle-check"></i> Recenzie Trimisă</h5>
+                        <p class="text-secondary small mb-0">Ai adăugat deja o recenzie pentru acest curs. O poți edita sau șterge mai jos.</p>
+                    </div>
+                </div>
             </div>
 
             <!-- Reviews List -->
@@ -85,6 +95,17 @@
                             </div>
                         </div>
                         <p class="mb-0 text-secondary small" th:text="${rev.comment}">Great course!</p>
+                        
+                        <!-- Student owns this review -> Edit/Delete controls -->
+                        <div th:if="${session.currentUser != null && (session.currentUser.id == rev.user.id || session.currentUser.role.name() == 'ADMIN')}" class="d-flex gap-2 mt-2">
+                            <a th:href="@{/web/reviews/edit/{id}(id=${rev.id})}" class="btn btn-outline-primary btn-sm px-2 py-0 rounded-pill" style="font-size: 0.75rem;">
+                                <i class="fa-solid fa-pen"></i> Editează
+                            </a>
+                            <a th:href="@{/web/reviews/delete/{id}(id=${rev.id})}" class="btn btn-outline-danger btn-sm px-2 py-0 rounded-pill" style="font-size: 0.75rem;"
+                               onclick="return confirm('Sigur doriți să ștergeți recenzia?');">
+                                <i class="fa-solid fa-trash"></i> Șterge
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>

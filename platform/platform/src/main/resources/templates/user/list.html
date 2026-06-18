@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::main})}">
+<body>
+<main>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="fw-bold text-primary"><i class="fa-solid fa-users me-2"></i>Gestionare Utilizatori</h2>
+            <p class="text-secondary small">Vizualizați, editați sau ștergeți conturile utilizatorilor din platformă</p>
+        </div>
+        <a th:href="@{/web/admin/users/create}" class="btn btn-primary rounded-pill px-4">
+            <i class="fa-solid fa-plus me-1"></i> Adaugă Utilizator Nou
+        </a>
+    </div>
+
+    <!-- User Save Error Display if any -->
+    <div th:if="${errorMsg}" class="alert alert-danger py-2" role="alert">
+        <i class="fa-solid fa-circle-xmark me-2"></i>
+        <span th:text="${errorMsg}">Eroare utilizator</span>
+    </div>
+
+    <div class="card card-custom p-4 shadow-sm">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th scope="col" style="width: 80px;">ID</th>
+                        <th scope="col">Nume Utilizator</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Rol</th>
+                        <th scope="col" style="width: 150px;" class="text-center">Opțiuni</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:if="${users.isEmpty()}">
+                        <td colspan="5" class="text-center py-4 text-secondary">Nu există utilizatori înregistrați.</td>
+                    </tr>
+                    <tr th:each="user : ${users}">
+                        <td class="fw-bold text-muted" th:text="${user.id}">1</td>
+                        <td>
+                            <div class="fw-semibold" th:text="${user.username}">username</div>
+                        </td>
+                        <td th:text="${user.email}">user@test.com</td>
+                        <td>
+                            <span class="badge" 
+                                  th:classappend="${user.role.name() == 'ADMIN'} ? 'bg-danger' : 'bg-secondary'"
+                                  th:text="${user.role}">USER</span>
+                        </td>
+                        <td class="text-center">
+                            <div class="d-flex justify-content-center gap-2">
+                                <a th:href="@{/web/admin/users/edit/{id}(id=${user.id})}" 
+                                   class="btn btn-primary btn-sm px-3 rounded-pill text-white d-inline-flex align-items-center gap-1">
+                                    <i class="fa-solid fa-pen"></i>
+                                    <span>Editează</span>
+                                </a>
+                                <a th:href="@{/web/admin/users/delete/{id}(id=${user.id})}" 
+                                   class="btn btn-danger btn-sm px-3 rounded-pill text-white d-inline-flex align-items-center gap-1"
+                                   th:if="${session.currentUser != null && session.currentUser.id != user.id}"
+                                   onclick="return confirm('Sigur doriți să ștergeți acest utilizator? Această acțiune va șterge profilul și toate înrolările sau recenziile asociate.');">
+                                    <i class="fa-solid fa-trash"></i>
+                                    <span>Șterge</span>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+</body>
+</html>

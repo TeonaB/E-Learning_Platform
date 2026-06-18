@@ -48,11 +48,12 @@ public class ReviewWebController {
         return "review/form";
     }
 
-    // USER: Save review
+    // USER/ADMIN: Save/Update review
     @PostMapping("/reviews/save/{courseId}")
     public String saveReview(@Valid @ModelAttribute("review") ReviewDto reviewDto,
                              BindingResult bindingResult,
                              @PathVariable Long courseId,
+                             @RequestParam(required = false) Long reviewId,
                              Model model,
                              HttpSession session) {
         User user = (User) session.getAttribute("currentUser");
@@ -62,6 +63,9 @@ public class ReviewWebController {
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("course", courseService.getCourseById(courseId));
+            if (reviewId != null) {
+                model.addAttribute("reviewId", reviewId);
+            }
             return "review/form";
         }
 
@@ -70,13 +74,68 @@ public class ReviewWebController {
         review.setComment(reviewDto.getComment());
 
         try {
-            reviewService.createReview(user.getId(), courseId, review);
+            if (reviewId != null) {
+                Review existingReview = reviewService.getReviewById(reviewId);
+                // Security check
+                if (!user.getRole().name().equals("ADMIN") && !existingReview.getUser().getId().equals(user.getId())) {
+                    return "redirect:/web/auth/login";
+                }
+                reviewService.updateReview(reviewId, review);
+            } else {
+                reviewService.createReview(user.getId(), courseId, review);
+            }
             return "redirect:/web/courses/" + courseId + "/lessons";
         } catch (BadRequestException ex) {
             model.addAttribute("saveError", ex.getMessage());
             model.addAttribute("course", courseService.getCourseById(courseId));
+            if (reviewId != null) {
+                model.addAttribute("reviewId", reviewId);
+            }
             return "review/form";
         }
+    }
+
+    // USER/ADMIN: Show form to edit a review
+    @GetMapping("/reviews/edit/{id}")
+    public String showEditReviewForm(@PathVariable Long id, Model model, HttpSession session) {
+        User user = (User) session.getAttribute("currentUser");
+        if (user == null) {
+            return "redirect:/web/auth/login";
+        }
+
+        Review review = reviewService.getReviewById(id);
+        // Security check: Only author or ADMIN
+        if (!user.getRole().name().equals("ADMIN") && !review.getUser().getId().equals(user.getId())) {
+            return "redirect:/web/home";
+        }
+
+        ReviewDto reviewDto = new ReviewDto();
+        reviewDto.setRating(review.getRating());
+        reviewDto.setComment(review.getComment());
+
+        model.addAttribute("reviewId", id);
+        model.addAttribute("review", reviewDto);
+        model.addAttribute("course", review.getCourse());
+        return "review/form";
+    }
+
+    // USER: Delete own review
+    @GetMapping("/reviews/delete/{id}")
+    public String deleteReviewForStudent(@PathVariable Long id, HttpSession session) {
+        User user = (User) session.getAttribute("currentUser");
+        if (user == null) {
+            return "redirect:/web/auth/login";
+        }
+
+        Review review = reviewService.getReviewById(id);
+        // Security check: Only author or ADMIN
+        if (!user.getRole().name().equals("ADMIN") && !review.getUser().getId().equals(user.getId())) {
+            return "redirect:/web/home";
+        }
+
+        Long courseId = review.getCourse().getId();
+        reviewService.deleteReview(id);
+        return "redirect:/web/courses/" + courseId + "/lessons";
     }
 
     // ADMIN: View all reviews list
