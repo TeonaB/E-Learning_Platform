@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::main})}">
+<body>
+<main class="d-flex align-items-center justify-content-center">
+    <div class="card card-custom p-4 shadow-sm" style="max-width: 600px; width: 100%;">
+        <div class="mb-4">
+            <h3 class="fw-bold text-primary">
+                <span th:if="${lessonId == null}"><i class="fa-solid fa-plus me-2"></i>Adaugă Lecție</span>
+                <span th:if="${lessonId != null}"><i class="fa-solid fa-pen-to-square me-2"></i>Editează Lecție</span>
+            </h3>
+            <p class="text-secondary small">Introduceți detaliile lecției pentru cursul curent</p>
+        </div>
+
+        <!-- Custom Error Display if any -->
+        <div th:if="${saveError}" class="alert alert-danger py-2" role="alert">
+            <i class="fa-solid fa-circle-xmark me-2"></i>
+            <span th:text="${saveError}">Eroare salvare</span>
+        </div>
+
+        <form th:action="@{/web/admin/lessons/save}" th:object="${lesson}" method="post">
+            <!-- Hidden inputs for mapping parameters -->
+            <input type="hidden" name="courseId" th:value="${courseId}" />
+            <input type="hidden" name="lessonId" th:value="${lessonId}" th:if="${lessonId != null}" />
+
+            <!-- Title -->
+            <div class="mb-3">
+                <label for="title" class="form-label fw-bold">Titlu Lecție</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fa-solid fa-heading"></i></span>
+                    <input type="text" class="form-control" id="title" th:field="*{title}" 
+                           placeholder="Ex: Introducere în OOP" required>
+                </div>
+                <div class="text-danger small mt-1" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">
+                    Titlul lecției este obligatoriu.
+                </div>
+            </div>
+
+            <!-- Content URL -->
+            <div class="mb-3">
+                <label for="contentUrl" class="form-label fw-bold">Link Resursă / Conținut</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fa-solid fa-link"></i></span>
+                    <input type="url" class="form-control" id="contentUrl" th:field="*{contentUrl}" 
+                           placeholder="Ex: https://youtube.com/watch?v=..." required>
+                </div>
+                <div class="text-danger small mt-1" th:if="${#fields.hasErrors('contentUrl')}" th:errors="*{contentUrl}">
+                    Link-ul conținutului este obligatoriu.
+                </div>
+            </div>
+
+            <!-- Duration -->
+            <div class="mb-4">
+                <label for="durationMinutes" class="form-label fw-bold">Durată (minute)</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fa-regular fa-clock"></i></span>
+                    <input type="number" class="form-control" id="durationMinutes" th:field="*{durationMinutes}" 
+                           placeholder="Ex: 45" min="0" required>
+                </div>
+                <div class="text-danger small mt-1" th:if="${#fields.hasErrors('durationMinutes')}" th:errors="*{durationMinutes}">
+                    Durata trebuie să fie mai mare sau egală cu 0.
+                </div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="d-flex justify-content-end gap-2">
+                <a th:href="@{/web/courses/{courseId}/lessons(courseId=${courseId})}" class="btn btn-outline-secondary rounded-pill px-4">Anulează</a>
+                <button type="submit" class="btn btn-primary rounded-pill px-4">Salvează</button>
+            </div>
+        </form>
+    </div>
+</main>
+</body>
+</html>

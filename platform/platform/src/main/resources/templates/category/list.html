@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::main})}">
+<body>
+<main>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold mb-0 text-primary"><i class="fa-solid fa-list me-2"></i>Gestionare Categorii</h2>
+        <a th:href="@{/web/admin/categories/create}" class="btn btn-primary rounded-pill px-4">
+            <i class="fa-solid fa-plus me-1"></i> Adaugă Categorie Nouă
+        </a>
+    </div>
+
+    <div class="card card-custom p-4 shadow-sm" style="max-width: 800px; margin: 0 auto;">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th scope="col" style="width: 80px;">ID</th>
+                        <th scope="col">Denumire</th>
+                        <th scope="col">Descriere</th>
+                        <th scope="col" style="width: 150px;" class="text-center">Opțiuni</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:if="${categories.isEmpty()}">
+                        <td colspan="4" class="text-center py-4 text-secondary">Nu există categorii introduse în platformă.</td>
+                    </tr>
+                    <tr th:each="cat : ${categories}">
+                        <td class="fw-bold" th:text="${cat.id}">1</td>
+                        <td class="fw-bold text-primary" th:text="${cat.name}">Web Development</td>
+                        <td class="text-secondary" th:text="${cat.description}">Category description...</td>
+                        <td class="text-center">
+                            <div class="d-flex justify-content-center gap-2">
+                                <a th:href="@{/web/admin/categories/edit/{id}(id=${cat.id})}" 
+                                   class="btn btn-outline-secondary btn-sm rounded-circle" 
+                                   title="Editează" style="width: 36px; height: 36px; display: inline-flex; align-items: center; justify-content: center;">
+                                    <i class="fa-solid fa-pen"></i>
+                                </a>
+                                <a th:href="@{/web/admin/categories/delete/{id}(id=${cat.id})}" 
+                                   class="btn btn-outline-danger btn-sm rounded-circle"
+                                   onclick="return confirm('Sigur doriți să ștergeți această categorie? Toate cursurile asociate vor fi șterse sau afectate.');"
+                                   title="Șterge" style="width: 36px; height: 36px; display: inline-flex; align-items: center; justify-content: center;">
+                                    <i class="fa-solid fa-trash"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+</body>
+</html>

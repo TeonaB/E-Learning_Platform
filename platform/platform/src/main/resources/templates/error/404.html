@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::main})}">
+<body>
+<main class="text-center py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="display-1 text-primary fw-bold mb-4" style="font-size: 6rem;">404</div>
+            <i class="fa-regular fa-compass text-muted mb-4" style="font-size: 5rem;"></i>
+            <h2 class="fw-bold mb-3">Pagina sau resursa nu a fost găsită</h2>
+            <p class="text-secondary mb-4">Ne pare rău, dar pagina sau resursa pe care o căutați nu există sau a fost mutată permanent.</p>
+            <a th:href="@{/web/home}" class="btn btn-primary btn-lg rounded-pill px-5">Înapoi la Pagina Principală</a>
+        </div>
+    </div>
+</main>
+</body>
+</html>

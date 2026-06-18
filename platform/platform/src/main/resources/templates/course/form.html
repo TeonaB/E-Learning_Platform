@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::main})}">
+<body>
+<main class="d-flex align-items-center justify-content-center">
+    <div class="card card-custom p-4 shadow-sm" style="max-width: 600px; width: 100%;">
+        <div class="mb-4">
+            <h3 class="fw-bold text-primary">
+                <span th:if="${courseId == null}"><i class="fa-solid fa-plus me-2"></i>Adaugă Curs</span>
+                <span th:if="${courseId != null}"><i class="fa-solid fa-pen-to-square me-2"></i>Editează Curs</span>
+            </h3>
+            <p class="text-secondary small">Introduceți informațiile necesare cursului</p>
+        </div>
+
+        <form th:action="@{/web/admin/courses/save}" th:object="${course}" method="post">
+            <!-- Hidden ID if editing -->
+            <input type="hidden" name="courseId" th:value="${courseId}" />
+
+            <!-- Title -->
+            <div class="mb-3">
+                <label for="title" class="form-label fw-bold">Titlu Curs</label>
+                <input type="text" class="form-control" id="title" th:field="*{title}" 
+                       placeholder="Introdu titlul cursului" required>
+                <div class="text-danger small mt-1" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">
+                    Titlul este obligatoriu.
+                </div>
+            </div>
+
+            <!-- Description -->
+            <div class="mb-3">
+                <label for="description" class="form-label fw-bold">Descriere Curs</label>
+                <textarea class="form-control" id="description" th:field="*{description}" rows="5" 
+                          placeholder="Detalii despre structură, cerințe și programă..."></textarea>
+                <div class="text-danger small mt-1" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">
+                    Descrierea este invalidă.
+                </div>
+            </div>
+
+            <!-- Category selection dropdown -->
+            <div class="mb-4">
+                <label for="categoryId" class="form-label fw-bold">Categorie Curs</label>
+                <select class="form-select" id="categoryId" th:field="*{categoryId}" required>
+                    <option value="" disabled selected>-- Selectează Categoria --</option>
+                    <th:block th:each="cat : ${categories}">
+                        <option th:value="${cat.id}" th:text="${cat.name}">Category name</option>
+                    </th:block>
+                </select>
+                <div class="text-danger small mt-1" th:if="${#fields.hasErrors('categoryId')}" th:errors="*{categoryId}">
+                    Categoria este obligatorie.
+                </div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="d-flex justify-content-end gap-2">
+                <a th:href="@{/web/admin/courses}" class="btn btn-outline-secondary rounded-pill px-4">Anulează</a>
+                <button type="submit" class="btn btn-primary rounded-pill px-4">Salvează Modificările</button>
+            </div>
+        </form>
+    </div>
+</main>
+</body>
+</html>

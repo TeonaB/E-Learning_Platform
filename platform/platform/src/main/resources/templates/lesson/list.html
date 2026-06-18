@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::main})}">
+<body>
+<main>
+    <!-- Course Header Info -->
+    <div class="mb-4">
+        <a th:href="@{/web/home}" class="text-decoration-none small text-muted"><i class="fa-solid fa-arrow-left"></i> Înapoi la Catalog</a>
+        <h2 class="fw-bold mt-2 text-primary" th:text="${course.title}">Nume Curs</h2>
+        <p class="text-secondary" th:text="${course.description}">Descriere completă curs...</p>
+    </div>
+
+    <div class="row">
+        <!-- Lessons Column -->
+        <div class="col-lg-8 mb-4">
+            <div class="card card-custom p-4 shadow-sm">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="fw-bold mb-0 text-primary"><i class="fa-solid fa-list-ol me-2"></i>Programa Cursului</h4>
+                    <!-- ADMIN: Add Lesson -->
+                    <a th:if="${session.currentUser != null && session.currentUser.role.name() == 'ADMIN'}" 
+                       th:href="@{/web/admin/lessons/create/{courseId}(courseId=${course.id})}" 
+                       class="btn btn-primary btn-sm rounded-pill px-3">
+                        <i class="fa-solid fa-plus me-1"></i> Adaugă Lecție
+                    </a>
+                </div>
+
+                <div th:if="${lessons.isEmpty()}" class="text-center py-4 text-secondary">
+                    Nu au fost adăugate lecții pentru acest curs încă.
+                </div>
+
+                <div class="list-group list-group-flush" th:if="${!lessons.isEmpty()}">
+                    <div th:each="lesson, stat : ${lessons}" class="list-group-item px-0 py-3 d-flex justify-content-between align-items-center">
+                        <div class="d-flex align-items-start gap-3">
+                            <span class="badge bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" 
+                                  style="width: 30px; height: 30px;" th:text="${stat.count}">1</span>
+                            <div>
+                                <h6 class="fw-bold mb-1" th:text="${lesson.title}">Lecție</h6>
+                                <div class="d-flex align-items-center gap-2 small text-muted">
+                                    <span><i class="fa-regular fa-clock me-1"></i><span th:text="${lesson.durationMinutes} + ' minute'">15 min</span></span>
+                                    <span>&bull;</span>
+                                    <a th:href="${lesson.contentUrl}" target="_blank" class="text-decoration-none"><i class="fa-solid fa-arrow-up-right-from-square me-1"></i> Deschide Conținut</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- ADMIN Controls -->
+                        <div th:if="${session.currentUser != null && session.currentUser.role.name() == 'ADMIN'}" class="d-flex gap-2">
+                            <a th:href="@{/web/admin/lessons/edit/{id}(id=${lesson.id})}" class="btn btn-outline-secondary btn-sm rounded-circle" style="width:32px; height:32px; display:inline-flex; align-items:center; justify-content:center;">
+                                <i class="fa-solid fa-pen"></i>
+                            </a>
+                            <a th:href="@{/web/admin/lessons/delete/{id}(id=${lesson.id})}" class="btn btn-outline-danger btn-sm rounded-circle" 
+                               onclick="return confirm('Sigur doriți să ștergeți această lecție?');" style="width:32px; height:32px; display:inline-flex; align-items:center; justify-content:center;">
+                                <i class="fa-solid fa-trash"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar / Reviews Column -->
+        <div class="col-lg-4">
+            <!-- Review Action -->
+            <div class="card card-custom p-4 shadow-sm mb-4 text-center" th:if="${session.currentUser != null && session.currentUser.role.name() == 'USER'}">
+                <h5 class="fw-bold mb-2 text-primary">Îți place acest curs?</h5>
+                <p class="text-secondary small">Spune-ne părerea ta lăsând o recenzie!</p>
+                <a th:href="@{/web/reviews/create/{courseId}(courseId=${course.id})}" class="btn btn-warning text-dark fw-bold rounded-pill w-full">
+                    <i class="fa-solid fa-star me-1"></i> Scrie o Recenzie
+                </a>
+            </div>
+
+            <!-- Reviews List -->
+            <div class="card card-custom p-4 shadow-sm">
+                <h5 class="fw-bold mb-3 text-primary"><i class="fa-regular fa-comments me-2"></i>Recenzii Studenți</h5>
+                
+                <div th:if="${course.reviews.isEmpty()}" class="text-secondary small text-center py-3">
+                    Nu există recenzii pentru acest curs. Fii primul care lasă una!
+                </div>
+
+                <div class="d-flex flex-column gap-3" th:if="${!course.reviews.isEmpty()}">
+                    <div th:each="rev : ${course.reviews}" class="pb-3 border-bottom last-border-none">
+                        <div class="d-flex justify-content-between align-items-center mb-1">
+                            <span class="fw-bold small text-secondary" th:text="${rev.user.username}">StudentName</span>
+                            <div class="text-warning small">
+                                <span th:each="i : ${#numbers.sequence(1, rev.rating)}"><i class="fa-solid fa-star"></i></span>
+                            </div>
+                        </div>
+                        <p class="mb-0 text-secondary small" th:text="${rev.comment}">Great course!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

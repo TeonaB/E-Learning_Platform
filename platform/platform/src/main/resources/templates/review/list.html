@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::main})}">
+<body>
+<main>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="fw-bold text-primary"><i class="fa-solid fa-star text-warning me-2"></i>Gestionare Recenzii</h2>
+            <p class="text-secondary small">Vizualizați și moderați toate recenziile adăugate de studenți</p>
+        </div>
+    </div>
+
+    <div class="card card-custom p-4 shadow-sm">
+        <div th:if="${reviews.isEmpty()}" class="text-center py-5 text-secondary">
+            <i class="fa-regular fa-folder-open fs-1 mb-3 text-muted"></i>
+            <p>Nu există nicio recenzie înregistrată în platformă.</p>
+        </div>
+
+        <div class="table-responsive" th:if="${!reviews.isEmpty()}">
+            <table class="table table-hover align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th style="width: 80px;">ID</th>
+                        <th>Student</th>
+                        <th>Curs</th>
+                        <th style="width: 150px;">Notă</th>
+                        <th>Comentariu</th>
+                        <th style="width: 100px;" class="text-center">Acțiuni</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="review : ${reviews}">
+                        <td class="fw-bold text-muted" th:text="${review.id}">1</td>
+                        <td>
+                            <div class="d-flex align-items-center gap-2">
+                                <i class="fa-solid fa-user text-secondary"></i>
+                                <span class="fw-semibold" th:text="${review.user.username}">username</span>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="badge bg-light text-primary border" th:text="${review.course.title}">Course Title</span>
+                        </td>
+                        <td>
+                            <div class="text-warning">
+                                <span th:each="i : ${#numbers.sequence(1, review.rating)}"><i class="fa-solid fa-star"></i></span>
+                                <span th:if="${review.rating < 5}" th:each="i : ${#numbers.sequence(1, 5 - review.rating)}"><i class="fa-regular fa-star text-muted"></i></span>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="text-secondary small" th:text="${review.comment != null && !review.comment.isEmpty() ? review.comment : '-'}">Comentariu...</span>
+                        </td>
+                        <td class="text-center">
+                            <a th:href="@{/web/admin/reviews/delete/{id}(id=${review.id})}" 
+                               class="btn btn-outline-danger btn-sm rounded-circle"
+                               onclick="return confirm('Sigur doriți să ștergeți această recenzie?');"
+                               style="width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center;"
+                               title="Șterge recenzie">
+                                <i class="fa-solid fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+</body>
+</html>

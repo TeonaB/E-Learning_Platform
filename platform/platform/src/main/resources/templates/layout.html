@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="layout(content)">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Learning Platform</title>
+    <!-- Outfit Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Webjars Bootstrap & FontAwesome -->
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.min.css}">
+    
+    <style>
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .navbar-custom {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .navbar-custom .navbar-brand, .navbar-custom .nav-link {
+            color: rgba(255, 255, 255, 0.9) !important;
+            font-weight: 500;
+        }
+        .navbar-custom .nav-link:hover {
+            color: #ffffff !important;
+            transform: translateY(-1px);
+        }
+        .btn-gradient {
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            color: white;
+            border: none;
+            transition: all 0.3s ease;
+        }
+        .btn-gradient:hover {
+            background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        }
+        .card-custom {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.04);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: white;
+        }
+        .card-custom:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+        }
+        footer {
+            margin-top: auto;
+            background-color: #0f172a;
+            color: #94a3b8;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom py-3">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" th:href="@{/web/home}">
+                <i class="fa-solid fa-graduation-cap me-2 fs-3 text-warning"></i>
+                <span class="fw-bold tracking-tight">EduPlatform</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-collapse navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/web/home}"><i class="fa-solid fa-house me-1"></i> Catalog</a>
+                    </li>
+                    <!-- Logged In User Links -->
+                    <th:block th:if="${session.currentUser != null}">
+                        <li class="nav-item" th:if="${session.currentUser.role.name() == 'USER'}">
+                            <a class="nav-link" th:href="@{/web/courses/my-courses}"><i class="fa-solid fa-book-open me-1"></i> Cursurile Mele</a>
+                        </li>
+                        <!-- Admin Control Links -->
+                        <li class="nav-item dropdown" th:if="${session.currentUser.role.name() == 'ADMIN'}">
+                            <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown">
+                                <i class="fa-solid fa-toolbox me-1"></i> Administrare
+                            </a>
+                            <ul class="dropdown-menu border-0 shadow">
+                                <li><a class="dropdown-item" th:href="@{/web/admin/courses}"><i class="fa-solid fa-book me-2"></i> Gestionare Cursuri</a></li>
+                                <li><a class="dropdown-item" th:href="@{/web/admin/categories}"><i class="fa-solid fa-list me-2"></i> Gestionare Categorii</a></li>
+                                <li><a class="dropdown-item" th:href="@{/web/admin/users}"><i class="fa-solid fa-users me-2"></i> Gestionare Utilizatori</a></li>
+                                <li><a class="dropdown-item" th:href="@{/web/admin/reviews}"><i class="fa-solid fa-star me-2"></i> Gestionare Recenzii</a></li>
+                            </ul>
+                        </li>
+                    </th:block>
+                </ul>
+                
+                <!-- Auth Section -->
+                <div class="d-flex align-items-center gap-2">
+                    <th:block th:if="${session.currentUser == null}">
+                        <a th:href="@{/web/auth/login}" class="btn btn-outline-light px-4 rounded-pill">Conectare</a>
+                        <a th:href="@{/web/auth/register}" class="btn btn-warning text-dark fw-bold px-4 rounded-pill">Înregistrare</a>
+                    </th:block>
+                    <th:block th:if="${session.currentUser != null}">
+                        <span class="text-white me-2">
+                            Salut, <strong th:text="${session.currentUser.username}">Student</strong>
+                            <span class="badge bg-warning text-dark ms-1" th:text="${session.currentUser.role}">Role</span>
+                        </span>
+                        <a th:href="@{/web/auth/logout}" class="btn btn-danger btn-sm rounded-pill px-3"><i class="fa-solid fa-right-from-bracket"></i> Ieșire</a>
+                    </th:block>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Slot -->
+    <div class="container py-5">
+        <div th:replace="${content}"></div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="py-4 border-top border-secondary">
+        <div class="container text-center">
+            <p class="mb-1">&copy; 2026 EduPlatform E-Learning Inc. Toate drepturile rezervate.</p>
+            <small class="text-muted">Proiect realizat cu Spring Boot, JPA, Thymeleaf și Bootstrap.</small>
+        </div>
+    </footer>
+
+    <!-- JS Files -->
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
