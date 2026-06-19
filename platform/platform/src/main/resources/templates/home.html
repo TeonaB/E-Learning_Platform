@@ -114,11 +114,11 @@
                                 
                                 <div class="mt-auto pt-3 border-top d-flex justify-content-between align-items-center">
                                     <!-- Context Action Button based on enrollment status -->
-                                    <th:block th:if="${session.currentUser == null}">
+                                    <th:block th:if="${currentUser == null}">
                                         <a th:href="@{/web/auth/login}" class="btn btn-outline-primary rounded-pill px-4">Înrolare</a>
                                     </th:block>
-                                    <th:block th:if="${session.currentUser != null}">
-                                        <th:block th:if="${session.currentUser.role.name() == 'USER'}">
+                                    <th:block th:if="${currentUser != null}">
+                                        <th:block th:if="${currentUser.role.name() == 'USER'}">
                                             <!-- Check if user is already enrolled -->
                                             <a th:if="${#lists.contains(enrolledCourseIds, course.id)}" 
                                                th:href="@{/web/courses/{id}/lessons(id=${course.id})}" 
@@ -133,7 +133,7 @@
                                                 </button>
                                             </form>
                                         </th:block>
-                                        <th:block th:if="${session.currentUser.role.name() == 'ADMIN'}">
+                                        <th:block th:if="${currentUser.role.name() == 'ADMIN'}">
                                             <span class="text-muted small">Admin Mode</span>
                                             <a th:href="@{/web/admin/courses/edit/{id}(id=${course.id})}" class="btn btn-outline-secondary btn-sm rounded-pill px-3">
                                                 <i class="fa-solid fa-pen-to-square"></i> Editează

@@ -1,265 +1,186 @@
-2026-06-19 13:06:33 [main] ERROR c.e.platform.aspect.LoggingAspect - AOP Business Exception in UserProfileServiceImpl.getProfileByUserId() after 13 ms. Message: Profile not found for user id 6
-2026-06-19 13:06:33 [main] ERROR c.e.platform.aspect.LoggingAspect - AOP Business Exception in UserProfileServiceImpl.getProfileByUserId() after 4 ms. Message: Profile not found for user id 6
-2026-06-19 13:12:07 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-06-19 13:12:19 [main] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-06-19 13:12:29 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-06-19 13:12:30 [main] ERROR c.e.platform.aspect.LoggingAspect - AOP Business Exception in UserProfileServiceImpl.getProfileByUserId() after 19 ms. Message: Profile not found for user id 6
-2026-06-19 13:12:30 [main] ERROR c.e.platform.aspect.LoggingAspect - AOP Business Exception in UserProfileServiceImpl.getProfileByUserId() after 2 ms. Message: Profile not found for user id 6
-2026-06-19 13:12:32 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-06-19 13:12:33 [main] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-06-19 13:12:37 [main] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-06-19 13:13:04 [http-nio-8080-exec-1] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource web/home1 for request '/web/home1'.
-2026-06-19 13:13:05 [http-nio-8080-exec-2] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
-2026-06-19 13:13:25 [http-nio-8080-exec-4] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource web/home1 for request '/web/home1'.
-2026-06-19 13:13:25 [http-nio-8080-exec-7] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
-2026-06-19 13:13:27 [http-nio-8080-exec-5] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource web/home1 for request '/web/home1'.
-2026-06-19 13:13:27 [http-nio-8080-exec-6] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
-2026-06-19 13:30:58 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-06-19 13:31:04 [main] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-06-19 13:31:08 [main] ERROR c.e.platform.aspect.LoggingAspect - AOP Business Exception in UserProfileServiceImpl.getProfileByUserId() after 6 ms. Message: Profile not found for user id 6
-2026-06-19 13:31:08 [main] ERROR c.e.platform.aspect.LoggingAspect - AOP Business Exception in UserProfileServiceImpl.getProfileByUserId() after 3 ms. Message: Profile not found for user id 6
-2026-06-19 13:31:09 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-06-19 13:31:09 [main] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-06-19 13:32:44 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-06-19 13:32:49 [main] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-06-19 13:32:52 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-06-19 13:32:53 [main] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-06-19 13:32:56 [main] ERROR c.e.platform.aspect.LoggingAspect - AOP Business Exception in UserProfileServiceImpl.getProfileByUserId() after 11 ms. Message: Profile not found for user id 6
-2026-06-19 13:32:56 [main] ERROR c.e.platform.aspect.LoggingAspect - AOP Business Exception in UserProfileServiceImpl.getProfileByUserId() after 5 ms. Message: Profile not found for user id 6
-2026-06-19 13:33:18 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-06-19 13:33:21 [main] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-06-19 13:33:59 [http-nio-8080-exec-1] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource web/home1 for request '/web/home1'.
-2026-06-19 13:33:59 [http-nio-8080-exec-2] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
-2026-06-19 13:34:05 [http-nio-8080-exec-3] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
-2026-06-19 13:34:11 [http-nio-8080-exec-7] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
-2026-06-19 13:34:13 [http-nio-8080-exec-9] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
-2026-06-19 13:34:15 [http-nio-8080-exec-10] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
-2026-06-19 13:34:17 [http-nio-8080-exec-2] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
-2026-06-19 13:34:20 [http-nio-8080-exec-3] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
-2026-06-19 13:34:23 [http-nio-8080-exec-7] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
-2026-06-19 13:34:27 [http-nio-8080-exec-9] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
-2026-06-19 13:34:31 [http-nio-8080-exec-10] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
-2026-06-19 13:34:33 [http-nio-8080-exec-2] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
-2026-06-19 13:34:36 [http-nio-8080-exec-3] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
-2026-06-19 13:34:38 [http-nio-8080-exec-6] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
-2026-06-19 13:34:42 [http-nio-8080-exec-8] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
-2026-06-19 13:34:47 [http-nio-8080-exec-1] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
-2026-06-19 13:34:48 [http-nio-8080-exec-4] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
-2026-06-19 13:35:00 [http-nio-8080-exec-7] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
-2026-06-19 13:35:05 [http-nio-8080-exec-9] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
-2026-06-19 13:35:08 [http-nio-8080-exec-10] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
-2026-06-19 13:35:10 [http-nio-8080-exec-2] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
-2026-06-19 13:35:16 [http-nio-8080-exec-3] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
-2026-06-19 13:36:17 [http-nio-8080-exec-9] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
-2026-06-19 13:36:21 [http-nio-8080-exec-10] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
-2026-06-19 13:36:26 [http-nio-8080-exec-2] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
-2026-06-19 13:39:01 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-06-19 13:39:07 [main] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-06-19 13:40:05 [main] WARN  org.hibernate.orm.jdbc.error - HHH000247: ErrorCode: 0, SQLState: 08S01
-2026-06-19 13:40:05 [main] WARN  org.hibernate.orm.jdbc.error - Communications link failure
-
-The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
-2026-06-19 13:40:05 [main] WARN  org.hibernate.orm.jdbc - HHH100046: Could not obtain connection to query JDBC database metadata
-org.hibernate.exception.JDBCConnectionException: Unable to obtain isolated JDBC connection [Communications link failure
-
-The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.] [n/a]
-	at org.hibernate.exception.internal.SQLStateConversionDelegate.convert(SQLStateConversionDelegate.java:80)
-	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:34)
-	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:115)
-	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:101)
-	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcIsolationDelegate.delegateWork(JdbcIsolationDelegate.java:51)
-	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.getJdbcEnvironmentUsingJdbcMetadata(JdbcEnvironmentInitiator.java:366)
-	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.getJdbcEnvironment(JdbcEnvironmentInitiator.java:143)
-	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:120)
-	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:80)
-	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:133)
-	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:260)
-	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:235)
-	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:212)
-	at org.hibernate.boot.model.relational.Database.<init>(Database.java:44)
-	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.getDatabase(InFlightMetadataCollectorImpl.java:251)
-	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.<init>(InFlightMetadataCollectorImpl.java:203)
-	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:172)
-	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:1392)
-	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.populateSessionFactoryBuilder(EntityManagerFactoryBuilderImpl.java:1472)
-	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1454)
-	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:93)
-	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:443)
-	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:436)
-	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:411)
-	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:419)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1864)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1813)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:603)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201)
-	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:977)
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:621)
-	at org.springframework.boot.web.server.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143)
-	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:756)
-	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:445)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1365)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354)
-	at com.elearning.platform.PlatformApplication.main(PlatformApplication.java:10)
-Caused by: com.mysql.cj.jdbc.exceptions.CommunicationsException: Communications link failure
-
-The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
-	at com.mysql.cj.jdbc.exceptions.SQLError.createCommunicationsException(SQLError.java:165)
-	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:55)
-	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:840)
-	at com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:416)
-	at com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:237)
-	at com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:180)
-	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:144)
-	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:373)
-	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:210)
-	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:488)
-	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:576)
-	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:97)
-	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:111)
-	at org.hibernate.engine.jdbc.connections.internal.DataSourceConnectionProvider.getConnection(DataSourceConnectionProvider.java:137)
-	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess.obtainConnection(JdbcEnvironmentInitiator.java:508)
-	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcIsolationDelegate.delegateWork(JdbcIsolationDelegate.java:48)
-	... 37 common frames omitted
-Caused by: com.mysql.cj.exceptions.CJCommunicationsException: Communications link failure
-
-The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
-	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
-	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:502)
-	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:486)
-	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:52)
-	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:95)
-	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:140)
-	at com.mysql.cj.exceptions.ExceptionFactory.createCommunicationsException(ExceptionFactory.java:156)
-	at com.mysql.cj.protocol.a.NativeSocketConnection.connect(NativeSocketConnection.java:79)
-	at com.mysql.cj.NativeSession.connect(NativeSession.java:142)
-	at com.mysql.cj.jdbc.ConnectionImpl.connectOneTryOnly(ConnectionImpl.java:964)
-	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:828)
-	... 50 common frames omitted
-Caused by: java.net.ConnectException: Connection refused: getsockopt
-	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
-	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:682)
-	at java.base/sun.nio.ch.NioSocketImpl.timedFinishConnect(NioSocketImpl.java:542)
-	at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:592)
-	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:327)
-	at java.base/java.net.Socket.connect(Socket.java:751)
-	at com.mysql.cj.protocol.StandardSocketFactory.connect(StandardSocketFactory.java:144)
-	at com.mysql.cj.protocol.a.NativeSocketConnection.connect(NativeSocketConnection.java:53)
-	... 53 common frames omitted
-2026-06-19 13:40:05 [main] ERROR o.s.o.j.LocalContainerEntityManagerFactoryBean - Failed to initialize JPA EntityManagerFactory: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment] due to: Unable to determine Dialect without JDBC metadata (please set 'jakarta.persistence.jdbc.url' for common cases or 'hibernate.dialect' when a custom Dialect implementation must be provided)
-2026-06-19 13:40:05 [main] WARN  o.s.b.w.s.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/hibernate/autoconfigure/HibernateJpaConfiguration.class]: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment] due to: Unable to determine Dialect without JDBC metadata (please set 'jakarta.persistence.jdbc.url' for common cases or 'hibernate.dialect' when a custom Dialect implementation must be provided)
-2026-06-19 13:40:05 [main] ERROR o.s.boot.SpringApplication - Application run failed
-org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/hibernate/autoconfigure/HibernateJpaConfiguration.class]: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment] due to: Unable to determine Dialect without JDBC metadata (please set 'jakarta.persistence.jdbc.url' for common cases or 'hibernate.dialect' when a custom Dialect implementation must be provided)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1817)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:603)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201)
-	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:977)
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:621)
-	at org.springframework.boot.web.server.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143)
-	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:756)
-	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:445)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1365)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354)
-	at com.elearning.platform.PlatformApplication.main(PlatformApplication.java:10)
-Caused by: org.hibernate.service.spi.ServiceException: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment] due to: Unable to determine Dialect without JDBC metadata (please set 'jakarta.persistence.jdbc.url' for common cases or 'hibernate.dialect' when a custom Dialect implementation must be provided)
-	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:273)
-	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:235)
-	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:212)
-	at org.hibernate.boot.model.relational.Database.<init>(Database.java:44)
-	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.getDatabase(InFlightMetadataCollectorImpl.java:251)
-	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.<init>(InFlightMetadataCollectorImpl.java:203)
-	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:172)
-	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:1392)
-	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.populateSessionFactoryBuilder(EntityManagerFactoryBuilderImpl.java:1472)
-	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1454)
-	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:93)
-	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:443)
-	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:436)
-	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:411)
-	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:419)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1864)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1813)
-	... 15 common frames omitted
-Caused by: org.hibernate.HibernateException: Unable to determine Dialect without JDBC metadata (please set 'jakarta.persistence.jdbc.url' for common cases or 'hibernate.dialect' when a custom Dialect implementation must be provided)
-	at org.hibernate.engine.jdbc.dialect.internal.DialectFactoryImpl.determineDialect(DialectFactoryImpl.java:190)
-	at org.hibernate.engine.jdbc.dialect.internal.DialectFactoryImpl.buildDialect(DialectFactoryImpl.java:86)
-	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.getJdbcEnvironmentWithDefaults(JdbcEnvironmentInitiator.java:200)
-	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.getJdbcEnvironmentUsingJdbcMetadata(JdbcEnvironmentInitiator.java:452)
-	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.getJdbcEnvironment(JdbcEnvironmentInitiator.java:143)
-	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:120)
-	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:80)
-	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:133)
-	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:260)
-	... 31 common frames omitted
-2026-06-19 13:40:44 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-06-19 13:40:48 [main] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-06-19 13:40:49 [main] WARN  o.s.b.w.s.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
-2026-06-19 13:40:49 [main] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
-
-***************************
-APPLICATION FAILED TO START
-***************************
-
-Description:
-
-Web server failed to start. Port 8080 was already in use.
-
-Action:
-
-Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
-
-2026-06-19 13:41:26 [http-nio-8080-exec-10] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
-2026-06-19 13:41:35 [http-nio-8080-exec-8] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
-2026-06-19 13:42:01 [http-nio-8080-exec-7] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
-2026-06-19 13:42:11 [http-nio-8080-exec-1] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
-2026-06-19 13:42:21 [http-nio-8080-exec-5] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
-2026-06-19 13:42:29 [http-nio-8080-exec-2] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
-2026-06-19 13:42:34 [http-nio-8080-exec-9] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
-2026-06-19 13:42:42 [http-nio-8080-exec-3] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
-2026-06-19 13:42:45 [http-nio-8080-exec-4] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
-2026-06-19 13:42:51 [http-nio-8080-exec-8] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
-2026-06-19 13:42:52 [http-nio-8080-exec-6] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
-2026-06-19 13:42:53 [http-nio-8080-exec-10] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
-2026-06-19 13:42:54 [http-nio-8080-exec-3] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
-2026-06-19 13:42:56 [http-nio-8080-exec-4] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
-2026-06-19 13:42:59 [http-nio-8080-exec-8] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
-2026-06-19 13:43:00 [http-nio-8080-exec-6] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
-2026-06-19 13:43:02 [http-nio-8080-exec-1] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
-2026-06-19 13:43:02 [http-nio-8080-exec-3] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
-2026-06-19 13:43:04 [http-nio-8080-exec-4] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
-2026-06-19 13:43:05 [http-nio-8080-exec-8] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
-2026-06-19 13:43:09 [http-nio-8080-exec-6] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
-2026-06-19 13:43:47 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-06-19 13:43:51 [main] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-06-19 13:47:50 [http-nio-8080-exec-3] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
-2026-06-19 13:47:55 [http-nio-8080-exec-5] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
-2026-06-19 13:47:58 [http-nio-8080-exec-8] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
-2026-06-19 13:48:00 [http-nio-8080-exec-9] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
-2026-06-19 13:48:02 [http-nio-8080-exec-1] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
-2026-06-19 13:48:04 [http-nio-8080-exec-3] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
-2026-06-19 13:48:07 [http-nio-8080-exec-6] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
-2026-06-19 13:48:08 [http-nio-8080-exec-7] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
-2026-06-19 13:48:10 [http-nio-8080-exec-10] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
-2026-06-19 13:48:11 [http-nio-8080-exec-2] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
-2026-06-19 13:48:13 [http-nio-8080-exec-4] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
-2026-06-19 13:48:14 [http-nio-8080-exec-6] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
-2026-06-19 13:48:17 [http-nio-8080-exec-7] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
-2026-06-19 13:48:19 [http-nio-8080-exec-10] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
-2026-06-19 13:48:20 [http-nio-8080-exec-2] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
-2026-06-19 13:48:21 [http-nio-8080-exec-4] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
-2026-06-19 13:48:22 [http-nio-8080-exec-6] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
-2026-06-19 13:50:44 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-06-19 13:50:51 [main] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-06-19 13:50:57 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-06-19 13:50:58 [main] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-06-19 13:51:03 [main] ERROR c.e.platform.aspect.LoggingAspect - AOP Business Exception in UserProfileServiceImpl.getProfileByUserId() after 10 ms. Message: Profile not found for user id 7
-2026-06-19 13:51:03 [main] ERROR c.e.platform.aspect.LoggingAspect - AOP Business Exception in UserProfileServiceImpl.getProfileByUserId() after 2 ms. Message: Profile not found for user id 7
+2026-06-20 01:15:28 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-20 01:15:33 [main] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-06-20 01:15:39 [main] ERROR c.e.platform.aspect.LoggingAspect - AOP Business Exception in UserProfileServiceImpl.getProfileByUserId() after 6 ms. Message: Profile not found for user id 7
+2026-06-20 01:15:39 [main] ERROR c.e.platform.aspect.LoggingAspect - AOP Business Exception in UserProfileServiceImpl.getProfileByUserId() after 2 ms. Message: Profile not found for user id 7
+2026-06-20 01:15:40 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-20 01:15:40 [main] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-06-20 01:16:57 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-20 01:17:01 [main] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-06-20 01:17:06 [main] ERROR c.e.platform.aspect.LoggingAspect - AOP Business Exception in UserProfileServiceImpl.getProfileByUserId() after 5 ms. Message: Profile not found for user id 7
+2026-06-20 01:17:06 [main] ERROR c.e.platform.aspect.LoggingAspect - AOP Business Exception in UserProfileServiceImpl.getProfileByUserId() after 2 ms. Message: Profile not found for user id 7
+2026-06-20 01:17:07 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-20 01:17:07 [main] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-06-20 01:18:26 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-20 01:18:30 [main] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-06-20 01:18:33 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-20 01:18:34 [main] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-06-20 01:18:37 [main] ERROR c.e.platform.aspect.LoggingAspect - AOP Business Exception in UserProfileServiceImpl.getProfileByUserId() after 8 ms. Message: Profile not found for user id 7
+2026-06-20 01:18:37 [main] ERROR c.e.platform.aspect.LoggingAspect - AOP Business Exception in UserProfileServiceImpl.getProfileByUserId() after 2 ms. Message: Profile not found for user id 7
+2026-06-20 01:19:49 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-20 01:19:51 [main] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-06-20 01:20:47 [http-nio-8080-exec-6] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 01:20:56 [http-nio-8080-exec-9] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 01:21:00 [http-nio-8080-exec-2] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 01:21:12 [http-nio-8080-exec-8] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 01:21:17 [http-nio-8080-exec-7] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 01:21:21 [http-nio-8080-exec-9] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 01:21:25 [http-nio-8080-exec-2] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 01:21:33 [http-nio-8080-exec-8] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 01:21:34 [http-nio-8080-exec-6] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 01:21:36 [http-nio-8080-exec-5] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 01:21:38 [http-nio-8080-exec-10] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 01:21:40 [http-nio-8080-exec-2] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 01:21:44 [http-nio-8080-exec-8] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 01:21:45 [http-nio-8080-exec-6] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 01:21:45 [http-nio-8080-exec-5] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 01:21:48 [http-nio-8080-exec-2] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 01:21:49 [http-nio-8080-exec-8] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 01:21:51 [http-nio-8080-exec-6] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 01:21:51 [http-nio-8080-exec-5] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 01:21:53 [http-nio-8080-exec-10] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 01:21:57 [http-nio-8080-exec-1] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 01:21:59 [http-nio-8080-exec-4] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 01:22:19 [http-nio-8080-exec-5] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 01:22:38 [http-nio-8080-exec-10] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 01:22:44 [http-nio-8080-exec-2] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 01:23:29 [http-nio-8080-exec-4] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 01:23:33 [http-nio-8080-exec-5] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 01:23:35 [http-nio-8080-exec-10] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 01:23:39 [http-nio-8080-exec-1] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 01:23:42 [http-nio-8080-exec-6] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 01:23:43 [http-nio-8080-exec-5] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 01:23:48 [http-nio-8080-exec-10] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 01:24:04 [http-nio-8080-exec-1] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 01:24:14 [http-nio-8080-exec-6] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 01:25:00 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-20 01:25:04 [main] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-06-20 01:25:09 [main] ERROR c.e.platform.aspect.LoggingAspect - AOP Business Exception in UserProfileServiceImpl.getProfileByUserId() after 7 ms. Message: Profile not found for user id 7
+2026-06-20 01:25:09 [main] ERROR c.e.platform.aspect.LoggingAspect - AOP Business Exception in UserProfileServiceImpl.getProfileByUserId() after 2 ms. Message: Profile not found for user id 7
+2026-06-20 01:25:10 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-20 01:25:10 [main] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-06-20 01:26:43 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-20 01:26:47 [main] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-06-20 01:27:21 [http-nio-8080-exec-2] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 01:27:23 [http-nio-8080-exec-4] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 01:27:25 [http-nio-8080-exec-5] ERROR c.e.platform.aspect.LoggingAspect - AOP Exception in JpaUserDetailsService.loadUserByUsername() after 80 ms. Message: User not found with email: teona@student2.com
+org.springframework.security.core.userdetails.UsernameNotFoundException: User not found with email: teona@student2.com
+	at com.elearning.platform.service.impl.JpaUserDetailsService.lambda$loadUserByUsername$0(JpaUserDetailsService.java:23)
+	at java.base/java.util.Optional.orElseThrow(Optional.java:407)
+	at com.elearning.platform.service.impl.JpaUserDetailsService.loadUserByUsername(JpaUserDetailsService.java:23)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:158)
+	at org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:82)
+	at com.elearning.platform.aspect.LoggingAspect.logAround(LoggingAspect.java:41)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:648)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:630)
+	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:70)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:96)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:719)
+	at com.elearning.platform.service.impl.JpaUserDetailsService$$SpringCGLIB$$0.loadUserByUsername(<generated>)
+	at org.springframework.security.authentication.dao.DaoAuthenticationProvider.retrieveUser(DaoAuthenticationProvider.java:106)
+	at org.springframework.security.authentication.dao.AbstractUserDetailsAuthenticationProvider.authenticate(AbstractUserDetailsAuthenticationProvider.java:145)
+	at org.springframework.security.authentication.ProviderManager.authenticate(ProviderManager.java:183)
+	at org.springframework.security.authentication.ProviderManager.authenticate(ProviderManager.java:215)
+	at org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter.attemptAuthentication(UsernamePasswordAuthenticationFilter.java:87)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:249)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:239)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:385)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:110)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:96)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:385)
+	at org.springframework.security.web.csrf.CsrfFilter.doFilterInternal(CsrfFilter.java:135)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:385)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:385)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:385)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:385)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:385)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:237)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:195)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.filter.ServletRequestPathFilter.doFilter(ServletRequestPathFilter.java:52)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74)
+	at org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebSecurityConfiguration.java:317)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:355)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:272)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:492)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1801)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57)
+	at java.base/java.lang.Thread.run(Thread.java:1516)
+2026-06-20 01:27:25 [http-nio-8080-exec-7] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 01:27:30 [http-nio-8080-exec-10] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 01:27:40 [http-nio-8080-exec-6] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 01:27:46 [http-nio-8080-exec-8] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 01:27:51 [http-nio-8080-exec-10] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 01:29:51 [main] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-06-20 01:30:16 [http-nio-8080-exec-5] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 01:30:20 [http-nio-8080-exec-7] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 01:30:36 [http-nio-8080-exec-6] ERROR c.e.platform.aspect.LoggingAspect - AOP Business Exception in UserServiceImpl.registerUser() after 193 ms. Message: Email already exists
+2026-06-20 01:30:36 [http-nio-8080-exec-3] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 01:30:42 [http-nio-8080-exec-10] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 01:30:48 [http-nio-8080-exec-5] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 01:30:54 [http-nio-8080-exec-6] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 01:31:01 [http-nio-8080-exec-2] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 01:31:03 [http-nio-8080-exec-7] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 01:31:06 [http-nio-8080-exec-3] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 01:31:09 [http-nio-8080-exec-10] WARN  o.s.s.c.bcrypt.BCryptPasswordEncoder - Encoded password does not look like BCrypt
+2026-06-20 01:31:09 [http-nio-8080-exec-1] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 01:31:15 [http-nio-8080-exec-8] WARN  o.s.s.c.bcrypt.BCryptPasswordEncoder - Encoded password does not look like BCrypt
+2026-06-20 01:31:15 [http-nio-8080-exec-5] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 01:31:28 [http-nio-8080-exec-4] WARN  o.s.s.c.bcrypt.BCryptPasswordEncoder - Encoded password does not look like BCrypt
+2026-06-20 01:31:28 [http-nio-8080-exec-6] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 01:31:33 [http-nio-8080-exec-3] WARN  o.s.s.c.bcrypt.BCryptPasswordEncoder - Encoded password does not look like BCrypt
+2026-06-20 01:31:33 [http-nio-8080-exec-9] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 01:32:51 [http-nio-8080-exec-4] WARN  o.s.s.c.bcrypt.BCryptPasswordEncoder - Encoded password does not look like BCrypt
+2026-06-20 01:32:51 [http-nio-8080-exec-6] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 01:35:59 [main] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-06-20 01:36:14 [http-nio-8080-exec-4] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 01:36:20 [http-nio-8080-exec-7] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 01:36:26 [http-nio-8080-exec-8] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 01:36:27 [http-nio-8080-exec-10] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 01:36:32 [http-nio-8080-exec-5] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 01:36:41 [http-nio-8080-exec-2] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource web/home/admin for request '/web/home/admin'.
+2026-06-20 01:36:41 [http-nio-8080-exec-7] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 01:36:49 [http-nio-8080-exec-6] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource web/home/admin for request '/web/home/admin'.
+2026-06-20 01:36:49 [http-nio-8080-exec-3] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 01:36:53 [http-nio-8080-exec-5] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 01:36:56 [http-nio-8080-exec-7] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.

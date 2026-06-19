@@ -9,7 +9,6 @@ import com.elearning.platform.mapper.ReviewMapper;
 import com.elearning.platform.service.interf.CourseService;
 import com.elearning.platform.service.interf.ReviewService;
 import com.elearning.platform.service.interf.UserService;
-import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -17,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -31,11 +31,8 @@ public class ReviewWebController {
 
     // USER: Show form to leave a review
     @GetMapping("/reviews/create/{courseId}")
-    public String showReviewForm(@PathVariable Long courseId, Model model, HttpSession session) {
-        User user = (User) session.getAttribute("currentUser");
-        if (user == null) {
-            return "redirect:/web/auth/login";
-        }
+    public String showReviewForm(@PathVariable Long courseId, Model model, Principal principal) {
+        User user = userService.getUserByEmail(principal.getName());
 
         // Verify enrollment
         User freshUser = userService.getUserById(user.getId());
@@ -57,11 +54,8 @@ public class ReviewWebController {
                              @PathVariable Long courseId,
                              @RequestParam(required = false) Long reviewId,
                              Model model,
-                             HttpSession session) {
-        User user = (User) session.getAttribute("currentUser");
-        if (user == null) {
-            return "redirect:/web/auth/login";
-        }
+                             Principal principal) {
+        User user = userService.getUserByEmail(principal.getName());
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("course", courseService.getCourseById(courseId));
@@ -97,11 +91,8 @@ public class ReviewWebController {
 
     // USER/ADMIN: Show form to edit a review
     @GetMapping("/reviews/edit/{id}")
-    public String showEditReviewForm(@PathVariable Long id, Model model, HttpSession session) {
-        User user = (User) session.getAttribute("currentUser");
-        if (user == null) {
-            return "redirect:/web/auth/login";
-        }
+    public String showEditReviewForm(@PathVariable Long id, Model model, Principal principal) {
+        User user = userService.getUserByEmail(principal.getName());
 
         Review review = reviewService.getReviewById(id);
         // Security check: Only author or ADMIN
@@ -119,11 +110,8 @@ public class ReviewWebController {
 
     // USER: Delete own review
     @GetMapping("/reviews/delete/{id}")
-    public String deleteReviewForStudent(@PathVariable Long id, HttpSession session) {
-        User user = (User) session.getAttribute("currentUser");
-        if (user == null) {
-            return "redirect:/web/auth/login";
-        }
+    public String deleteReviewForStudent(@PathVariable Long id, Principal principal) {
+        User user = userService.getUserByEmail(principal.getName());
 
         Review review = reviewService.getReviewById(id);
         // Security check: Only author or ADMIN
@@ -138,22 +126,14 @@ public class ReviewWebController {
 
     // ADMIN: View all reviews list
     @GetMapping("/admin/reviews")
-    public String listReviews(Model model, HttpSession session) {
-        User user = (User) session.getAttribute("currentUser");
-        if (user == null || !user.getRole().name().equals("ADMIN")) {
-            return "redirect:/web/auth/login";
-        }
+    public String listReviews(Model model) {
         model.addAttribute("reviews", reviewService.getAllReviews());
         return "review/list";
     }
 
     // ADMIN: Delete review
     @GetMapping("/admin/reviews/delete/{id}")
-    public String deleteReview(@PathVariable Long id, HttpSession session) {
-        User user = (User) session.getAttribute("currentUser");
-        if (user == null || !user.getRole().name().equals("ADMIN")) {
-            return "redirect:/web/auth/login";
-        }
+    public String deleteReview(@PathVariable Long id) {
         reviewService.deleteReview(id);
         return "redirect:/web/admin/reviews";
     }

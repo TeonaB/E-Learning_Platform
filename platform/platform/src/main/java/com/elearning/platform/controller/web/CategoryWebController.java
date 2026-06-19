@@ -1,12 +1,10 @@
 package com.elearning.platform.controller.web;
 
 import com.elearning.platform.domain.Category;
-import com.elearning.platform.domain.User;
 import com.elearning.platform.dto.CategoryDto;
 import com.elearning.platform.exception.BadRequestException;
 import com.elearning.platform.mapper.CategoryMapper;
 import com.elearning.platform.service.interf.CategoryService;
-import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -32,12 +30,7 @@ public class CategoryWebController {
             @RequestParam(defaultValue = "5") int size,
             @RequestParam(defaultValue = "name") String sortBy,
             @RequestParam(defaultValue = "asc") String sortDir,
-            Model model,
-            HttpSession session) {
-        User user = (User) session.getAttribute("currentUser");
-        if (user == null || !user.getRole().name().equals("ADMIN")) {
-            return "redirect:/web/auth/login";
-        }
+            Model model) {
 
         Sort sort = "coursesCount".equals(sortBy) 
                 ? Sort.unsorted() 
@@ -58,21 +51,13 @@ public class CategoryWebController {
     }
 
     @GetMapping("/create")
-    public String showCreateForm(Model model, HttpSession session) {
-        User user = (User) session.getAttribute("currentUser");
-        if (user == null || !user.getRole().name().equals("ADMIN")) {
-            return "redirect:/web/auth/login";
-        }
+    public String showCreateForm(Model model) {
         model.addAttribute("category", new CategoryDto());
         return "category/form";
     }
 
     @GetMapping("/edit/{id}")
-    public String showEditForm(@PathVariable Long id, Model model, HttpSession session) {
-        User user = (User) session.getAttribute("currentUser");
-        if (user == null || !user.getRole().name().equals("ADMIN")) {
-            return "redirect:/web/auth/login";
-        }
+    public String showEditForm(@PathVariable Long id, Model model) {
         Category category = categoryService.getCategoryById(id);
         CategoryDto categoryDto = categoryMapper.toCategoryDto(category);
         
@@ -85,12 +70,7 @@ public class CategoryWebController {
     public String saveCategory(@Valid @ModelAttribute("category") CategoryDto categoryDto,
                                BindingResult bindingResult,
                                @RequestParam(required = false) Long categoryId,
-                               Model model,
-                               HttpSession session) {
-        User user = (User) session.getAttribute("currentUser");
-        if (user == null || !user.getRole().name().equals("ADMIN")) {
-            return "redirect:/web/auth/login";
-        }
+                               Model model) {
 
         if (bindingResult.hasErrors()) {
             if (categoryId != null) {
@@ -118,11 +98,7 @@ public class CategoryWebController {
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteCategory(@PathVariable Long id, HttpSession session) {
-        User user = (User) session.getAttribute("currentUser");
-        if (user == null || !user.getRole().name().equals("ADMIN")) {
-            return "redirect:/web/auth/login";
-        }
+    public String deleteCategory(@PathVariable Long id) {
         categoryService.deleteCategory(id);
         return "redirect:/web/admin/categories";
     }

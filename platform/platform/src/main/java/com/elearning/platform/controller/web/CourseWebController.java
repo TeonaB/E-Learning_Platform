@@ -7,7 +7,7 @@ import com.elearning.platform.dto.CourseDto;
 import com.elearning.platform.mapper.CourseMapper;
 import com.elearning.platform.service.interf.CategoryService;
 import com.elearning.platform.service.interf.CourseService;
-import jakarta.servlet.http.HttpSession;
+import com.elearning.platform.service.interf.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -15,8 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import com.elearning.platform.service.interf.UserService;
-
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -31,22 +30,14 @@ public class CourseWebController {
 
     // ADMIN: View courses list
     @GetMapping("/admin/courses")
-    public String listCourses(Model model, HttpSession session) {
-        User user = (User) session.getAttribute("currentUser");
-        if (user == null || !user.getRole().name().equals("ADMIN")) {
-            return "redirect:/web/auth/login";
-        }
+    public String listCourses(Model model) {
         model.addAttribute("courses", courseService.getAllCourses());
         return "course/list";
     }
 
     // ADMIN: Show create form
     @GetMapping("/admin/courses/create")
-    public String showCreateForm(Model model, HttpSession session) {
-        User user = (User) session.getAttribute("currentUser");
-        if (user == null || !user.getRole().name().equals("ADMIN")) {
-            return "redirect:/web/auth/login";
-        }
+    public String showCreateForm(Model model) {
         model.addAttribute("course", new CourseDto());
         model.addAttribute("categories", categoryService.getAllCategories());
         return "course/form";
@@ -54,11 +45,7 @@ public class CourseWebController {
 
     // ADMIN: Show edit form
     @GetMapping("/admin/courses/edit/{id}")
-    public String showEditForm(@PathVariable Long id, Model model, HttpSession session) {
-        User user = (User) session.getAttribute("currentUser");
-        if (user == null || !user.getRole().name().equals("ADMIN")) {
-            return "redirect:/web/auth/login";
-        }
+    public String showEditForm(@PathVariable Long id, Model model) {
         Course course = courseService.getCourseById(id);
         CourseDto courseDto = courseMapper.toCourseDto(course);
         
@@ -73,12 +60,7 @@ public class CourseWebController {
     public String saveCourse(@Valid @ModelAttribute("course") CourseDto courseDto,
                              BindingResult bindingResult,
                              @RequestParam(required = false) Long courseId,
-                             Model model,
-                             HttpSession session) {
-        User user = (User) session.getAttribute("currentUser");
-        if (user == null || !user.getRole().name().equals("ADMIN")) {
-            return "redirect:/web/auth/login";
-        }
+                             Model model) {
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("categories", categoryService.getAllCategories());
@@ -104,22 +86,15 @@ public class CourseWebController {
 
     // ADMIN: Delete course
     @GetMapping("/admin/courses/delete/{id}")
-    public String deleteCourse(@PathVariable Long id, HttpSession session) {
-        User user = (User) session.getAttribute("currentUser");
-        if (user == null || !user.getRole().name().equals("ADMIN")) {
-            return "redirect:/web/auth/login";
-        }
+    public String deleteCourse(@PathVariable Long id) {
         courseService.deleteCourse(id);
         return "redirect:/web/admin/courses";
     }
 
     // USER: View enrolled courses
     @GetMapping("/courses/my-courses")
-    public String myCourses(Model model, HttpSession session) {
-        User user = (User) session.getAttribute("currentUser");
-        if (user == null) {
-            return "redirect:/web/auth/login";
-        }
+    public String myCourses(Model model, Principal principal) {
+        User user = userService.getUserByEmail(principal.getName());
         List<Course> myCourses = userService.getUserCourses(user.getId());
         model.addAttribute("courses", myCourses);
         return "course/my-courses";
@@ -127,11 +102,8 @@ public class CourseWebController {
 
     // USER: Enroll in course
     @PostMapping("/courses/{id}/enroll")
-    public String enroll(@PathVariable Long id, HttpSession session) {
-        User user = (User) session.getAttribute("currentUser");
-        if (user == null) {
-            return "redirect:/web/auth/login";
-        }
+    public String enroll(@PathVariable Long id, Principal principal) {
+        User user = userService.getUserByEmail(principal.getName());
         courseService.enrollUser(id, user.getId());
         return "redirect:/web/home";
     }

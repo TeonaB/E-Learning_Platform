@@ -10,36 +10,42 @@
         </div>
 
         <!-- General Login Error -->
-        <div th:if="${loginError}" class="alert alert-danger py-2" role="alert">
+        <div th:if="${param.error}" class="alert alert-danger py-2" role="alert">
             <i class="fa-solid fa-circle-xmark me-2"></i>
-            <span th:text="${loginError}">Eroare</span>
+            <span>Email sau parolă incorectă!</span>
         </div>
 
-        <form th:action="@{/web/auth/login}" th:object="${loginRequest}" method="post">
+        <!-- Registration Success -->
+        <div th:if="${param.registered}" class="alert alert-success py-2" role="alert">
+            <i class="fa-solid fa-circle-check me-2"></i>
+            <span>Înregistrare reușită! Vă puteți conecta acum.</span>
+        </div>
+
+        <form th:action="@{/web/auth/login}" method="post">
             <!-- Email -->
             <div class="mb-3">
                 <label for="email" class="form-label fw-bold">Adresă de Email</label>
                 <div class="input-group">
                     <span class="input-group-text"><i class="fa-solid fa-envelope text-muted"></i></span>
-                    <input type="email" class="form-control" id="email" th:field="*{email}" 
+                    <input type="email" class="form-control" id="email" name="email" 
                            placeholder="exemplu@mail.com" required>
-                </div>
-                <div class="text-danger small mt-1" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">
-                    Format email invalid
                 </div>
             </div>
 
             <!-- Password -->
-            <div class="mb-4">
+            <div class="mb-3">
                 <label for="password" class="form-label fw-bold">Parolă</label>
                 <div class="input-group">
                     <span class="input-group-text"><i class="fa-solid fa-lock text-muted"></i></span>
-                    <input type="password" class="form-control" id="password" th:field="*{password}" 
+                    <input type="password" class="form-control" id="password" name="password" 
                            placeholder="Parola ta" required>
                 </div>
-                <div class="text-danger small mt-1" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">
-                    Parola este obligatorie
-                </div>
+            </div>
+
+            <!-- Remember Me checkbox -->
+            <div class="mb-4 form-check">
+                <input type="checkbox" class="form-check-input" id="remember-me" name="remember-me">
+                <label class="form-check-label text-secondary small" for="remember-me">Ține-mă minte</label>
             </div>
 
             <!-- Submit -->

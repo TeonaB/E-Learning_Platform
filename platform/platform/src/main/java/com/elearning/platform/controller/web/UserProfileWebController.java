@@ -6,7 +6,7 @@ import com.elearning.platform.dto.UserProfileDto;
 import com.elearning.platform.exception.ResourceNotFoundException;
 import com.elearning.platform.mapper.UserProfileMapper;
 import com.elearning.platform.service.interf.UserProfileService;
-import jakarta.servlet.http.HttpSession;
+import com.elearning.platform.service.interf.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.security.Principal;
+
 @Controller
 @RequestMapping("/web/profile")
 @RequiredArgsConstructor
@@ -25,14 +27,12 @@ public class UserProfileWebController {
 
     private final UserProfileService userProfileService;
     private final UserProfileMapper userProfileMapper;
+    private final UserService userService;
 
     // View Profile page (details & form)
     @GetMapping
-    public String showProfile(Model model, HttpSession session) {
-        User currentUser = (User) session.getAttribute("currentUser");
-        if (currentUser == null) {
-            return "redirect:/web/auth/login";
-        }
+    public String showProfile(Model model, Principal principal) {
+        User currentUser = userService.getUserByEmail(principal.getName());
 
         UserProfileDto profileDto = new UserProfileDto();
         boolean isNew = true;
@@ -58,12 +58,9 @@ public class UserProfileWebController {
     public String saveProfile(@Valid @ModelAttribute("profile") UserProfileDto profileDto,
                               BindingResult bindingResult,
                               Model model,
-                              HttpSession session,
+                              Principal principal,
                               RedirectAttributes redirectAttributes) {
-        User currentUser = (User) session.getAttribute("currentUser");
-        if (currentUser == null) {
-            return "redirect:/web/auth/login";
-        }
+        User currentUser = userService.getUserByEmail(principal.getName());
 
         boolean isNew = true;
         Long profileId = null;
@@ -103,11 +100,8 @@ public class UserProfileWebController {
 
     // Delete Profile
     @PostMapping("/delete")
-    public String deleteProfile(HttpSession session, RedirectAttributes redirectAttributes) {
-        User currentUser = (User) session.getAttribute("currentUser");
-        if (currentUser == null) {
-            return "redirect:/web/auth/login";
-        }
+    public String deleteProfile(Principal principal, RedirectAttributes redirectAttributes) {
+        User currentUser = userService.getUserByEmail(principal.getName());
 
         try {
             UserProfile profile = userProfileService.getProfileByUserId(currentUser.getId());

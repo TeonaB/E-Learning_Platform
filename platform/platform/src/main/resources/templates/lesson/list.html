@@ -16,7 +16,7 @@
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h4 class="fw-bold mb-0 text-primary"><i class="fa-solid fa-list-ol me-2"></i>Programa Cursului</h4>
                     <!-- ADMIN: Add Lesson -->
-                    <a th:if="${session.currentUser != null && session.currentUser.role.name() == 'ADMIN'}" 
+                    <a th:if="${currentUser != null && currentUser.role.name() == 'ADMIN'}" 
                        th:href="@{/web/admin/lessons/create/{courseId}(courseId=${course.id})}" 
                        class="btn btn-primary btn-sm rounded-pill px-3">
                         <i class="fa-solid fa-plus me-1"></i> Adaugă Lecție
@@ -43,7 +43,7 @@
                         </div>
                         
                         <!-- ADMIN Controls -->
-                        <div th:if="${session.currentUser != null && session.currentUser.role.name() == 'ADMIN'}" class="d-flex gap-2">
+                        <div th:if="${currentUser != null && currentUser.role.name() == 'ADMIN'}" class="d-flex gap-2">
                             <a th:href="@{/web/admin/lessons/edit/{id}(id=${lesson.id})}" class="btn btn-primary btn-sm px-3 rounded-pill text-white d-inline-flex align-items-center gap-1">
                                 <i class="fa-solid fa-pen"></i>
                                 <span>Editează</span>
@@ -62,8 +62,8 @@
         <!-- Sidebar / Reviews Column -->
         <div class="col-lg-4">
             <!-- Review Action -->
-            <div class="card card-custom p-4 shadow-sm mb-4 text-center" th:if="${session.currentUser != null && session.currentUser.role.name() == 'USER'}">
-                <div th:with="userReviews=${course.reviews.?[user.id == __${session.currentUser.id}__]}">
+            <div class="card card-custom p-4 shadow-sm mb-4 text-center" th:if="${currentUser != null && currentUser.role.name() == 'USER'}">
+                <div th:with="userReviews=${course.reviews.?[user.id == __${currentUser.id}__]}">
                     <div th:if="${userReviews.isEmpty()}">
                         <h5 class="fw-bold mb-2 text-primary">Îți place acest curs?</h5>
                         <p class="text-secondary small">Spune-ne părerea ta lăsând o recenzie!</p>
@@ -97,7 +97,7 @@
                         <p class="mb-0 text-secondary small" th:text="${rev.comment}">Great course!</p>
                         
                         <!-- Student owns this review -> Edit/Delete controls -->
-                        <div th:if="${session.currentUser != null && (session.currentUser.id == rev.user.id || session.currentUser.role.name() == 'ADMIN')}" class="d-flex gap-2 mt-2">
+                        <div th:if="${currentUser != null && (currentUser.id == rev.user.id || currentUser.role.name() == 'ADMIN')}" class="d-flex gap-2 mt-2">
                             <a th:href="@{/web/reviews/edit/{id}(id=${rev.id})}" class="btn btn-outline-primary btn-sm px-2 py-0 rounded-pill" style="font-size: 0.75rem;">
                                 <i class="fa-solid fa-pen"></i> Editează
                             </a>

@@ -8,7 +8,6 @@ import com.elearning.platform.mapper.LessonMapper;
 import com.elearning.platform.service.interf.CourseService;
 import com.elearning.platform.service.interf.LessonService;
 import com.elearning.platform.service.interf.UserService;
-import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -16,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -30,11 +30,8 @@ public class LessonWebController {
 
     // Student/Admin: View lessons of a specific course
     @GetMapping("/courses/{courseId}/lessons")
-    public String viewCourseLessons(@PathVariable Long courseId, Model model, HttpSession session) {
-        User user = (User) session.getAttribute("currentUser");
-        if (user == null) {
-            return "redirect:/web/auth/login";
-        }
+    public String viewCourseLessons(@PathVariable Long courseId, Model model, Principal principal) {
+        User user = userService.getUserByEmail(principal.getName());
 
         Course course = courseService.getCourseById(courseId);
         
@@ -54,12 +51,7 @@ public class LessonWebController {
 
     // ADMIN: Show create form for a lesson under a course
     @GetMapping("/admin/lessons/create/{courseId}")
-    public String showCreateForm(@PathVariable Long courseId, Model model, HttpSession session) {
-        User user = (User) session.getAttribute("currentUser");
-        if (user == null || !user.getRole().name().equals("ADMIN")) {
-            return "redirect:/web/auth/login";
-        }
-        
+    public String showCreateForm(@PathVariable Long courseId, Model model) {
         LessonDto lessonDto = new LessonDto();
         model.addAttribute("lesson", lessonDto);
         model.addAttribute("courseId", courseId);
@@ -68,12 +60,7 @@ public class LessonWebController {
 
     // ADMIN: Show edit form
     @GetMapping("/admin/lessons/edit/{id}")
-    public String showEditForm(@PathVariable Long id, Model model, HttpSession session) {
-        User user = (User) session.getAttribute("currentUser");
-        if (user == null || !user.getRole().name().equals("ADMIN")) {
-            return "redirect:/web/auth/login";
-        }
-        
+    public String showEditForm(@PathVariable Long id, Model model) {
         Lesson lesson = lessonService.getLessonById(id);
         LessonDto lessonDto = lessonMapper.toLessonDto(lesson);
         
@@ -89,12 +76,7 @@ public class LessonWebController {
                              BindingResult bindingResult,
                              @RequestParam Long courseId,
                              @RequestParam(required = false) Long lessonId,
-                             Model model,
-                             HttpSession session) {
-        User user = (User) session.getAttribute("currentUser");
-        if (user == null || !user.getRole().name().equals("ADMIN")) {
-            return "redirect:/web/auth/login";
-        }
+                             Model model) {
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("courseId", courseId);
@@ -117,11 +99,7 @@ public class LessonWebController {
 
     // ADMIN: Delete lesson
     @GetMapping("/admin/lessons/delete/{id}")
-    public String deleteLesson(@PathVariable Long id, HttpSession session) {
-        User user = (User) session.getAttribute("currentUser");
-        if (user == null || !user.getRole().name().equals("ADMIN")) {
-            return "redirect:/web/auth/login";
-        }
+    public String deleteLesson(@PathVariable Long id) {
         Lesson lesson = lessonService.getLessonById(id);
         Long courseId = lesson.getCourse().getId();
         lessonService.deleteLesson(id);

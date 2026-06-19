@@ -11,6 +11,7 @@ import com.elearning.platform.service.interf.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +22,7 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
 
     @Override
@@ -52,7 +54,7 @@ public class UserServiceImpl implements UserService {
             throw new BadRequestException("Username already exists");
         }
 
-        user.setPassword(user.getPassword());
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         if (user.getRole() == null) {
             user.setRole(Role.USER);
         }
@@ -66,9 +68,8 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new UnauthorizedException("Invalid email or password"));
 
-        if (rawPassword.equals(user.getPassword())) {
-            user.setPassword(rawPassword);
-            return userRepository.save(user);
+        if (passwordEncoder.matches(rawPassword, user.getPassword())) {
+            return user;
         }
 
         throw new UnauthorizedException("Invalid email or password");
@@ -88,7 +89,9 @@ public class UserServiceImpl implements UserService {
         }
 
         user.setEmail(updated.getEmail());
-        user.setPassword(updated.getPassword());
+        if (updated.getPassword() != null && !updated.getPassword().isEmpty() && !updated.getPassword().equals(user.getPassword())) {
+            user.setPassword(passwordEncoder.encode(updated.getPassword()));
+        }
         user.setRole(updated.getRole());
         user.setUsername(updated.getUsername());
 

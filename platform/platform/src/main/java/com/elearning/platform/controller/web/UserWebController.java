@@ -1,13 +1,10 @@
 package com.elearning.platform.controller.web;
 
 import com.elearning.platform.domain.User;
-import com.elearning.platform.dto.LoginRequestDto;
 import com.elearning.platform.dto.UserDto;
 import com.elearning.platform.exception.BadRequestException;
-import com.elearning.platform.exception.UnauthorizedException;
 import com.elearning.platform.mapper.UserMapper;
 import com.elearning.platform.service.interf.UserService;
-import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -24,25 +21,13 @@ public class UserWebController {
     private final UserMapper userMapper;
 
     @GetMapping("/login")
-    public String showLoginForm(Model model) {
-        model.addAttribute("loginRequest", new LoginRequestDto());
+    public String showLoginForm() {
         return "login";
     }
 
-    @PostMapping("/login")
-    public String login(@Valid @ModelAttribute("loginRequest") LoginRequestDto loginRequest,
-                        BindingResult bindingResult, HttpSession session, Model model) {
-        if (bindingResult.hasErrors()) {
-            return "login";
-        }
-        try {
-            User user = userService.login(loginRequest.getEmail(), loginRequest.getPassword());
-            session.setAttribute("currentUser", user);
-            return "redirect:/web/home";
-        } catch (UnauthorizedException ex) {
-            model.addAttribute("loginError", "Email sau parolă incorectă!");
-            return "login";
-        }
+    @GetMapping("/access-denied")
+    public String accessDenied() {
+        return "access-denied";
     }
 
     @GetMapping("/register")
@@ -53,25 +38,17 @@ public class UserWebController {
 
     @PostMapping("/register")
     public String register(@Valid @ModelAttribute("user") UserDto userDto,
-                           BindingResult bindingResult, Model model, HttpSession session) {
+                           BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "register";
         }
         try {
             User user = userMapper.toUser(userDto);
-            User savedUser = userService.registerUser(user);
-            session.setAttribute("currentUser", savedUser);
-            return "redirect:/web/home";
+            userService.registerUser(user);
+            return "redirect:/web/auth/login?registered=true";
         } catch (BadRequestException ex) {
             model.addAttribute("registerError", ex.getMessage());
             return "register";
         }
-    }
-
-    @GetMapping("/logout")
-    public String logout(HttpSession session) {
-        session.removeAttribute("currentUser");
-        session.invalidate();
-        return "redirect:/web/home";
     }
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:fragment="layout(content)">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" th:fragment="layout(content)">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -81,12 +81,12 @@
                         <a class="nav-link" th:href="@{/web/home}"><i class="fa-solid fa-house me-1"></i> Catalog</a>
                     </li>
                     <!-- Logged In User Links -->
-                    <th:block th:if="${session.currentUser != null}">
-                        <li class="nav-item" th:if="${session.currentUser.role.name() == 'USER'}">
+                    <th:block th:if="${currentUser != null}">
+                        <li class="nav-item" th:if="${currentUser.role.name() == 'USER'}">
                             <a class="nav-link" th:href="@{/web/courses/my-courses}"><i class="fa-solid fa-book-open me-1"></i> Cursurile Mele</a>
                         </li>
                         <!-- Admin Control Links -->
-                        <li class="nav-item dropdown" th:if="${session.currentUser.role.name() == 'ADMIN'}">
+                        <li class="nav-item dropdown" th:if="${currentUser.role.name() == 'ADMIN'}">
                             <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown">
                                 <i class="fa-solid fa-toolbox me-1"></i> Administrare
                             </a>
@@ -102,16 +102,20 @@
                 
                 <!-- Auth Section -->
                 <div class="d-flex align-items-center gap-2 ms-lg-auto">
-                    <th:block th:if="${session.currentUser == null}">
+                    <th:block th:if="${currentUser == null}">
                         <a th:href="@{/web/auth/login}" class="btn btn-warning px-4 rounded-pill text-dark fw-bold shadow-sm" style="color: #1e293b !important; background-color: #ffc107 !important; border-color: #ffc107 !important;">Conectare</a>
                         <a th:href="@{/web/auth/register}" class="btn btn-warning px-4 rounded-pill text-dark fw-bold shadow-sm" style="color: #1e293b !important; background-color: #ffc107 !important; border-color: #ffc107 !important;">Înregistrare</a>
                     </th:block>
-                    <th:block th:if="${session.currentUser != null}">
+                    <th:block th:if="${currentUser != null}">
                         <span class="text-white me-2">
-                            Salut, <strong th:text="${session.currentUser.username}">Student</strong>
+                            Salut, <strong th:text="${currentUser.username}">Student</strong>
                         </span>
                         <a th:href="@{/web/profile}" class="btn btn-outline-light btn-sm rounded-pill px-3 me-2"><i class="fa-solid fa-user me-1"></i> Profil</a>
-                        <a th:href="@{/web/auth/logout}" class="btn btn-warning btn-sm rounded-pill px-3 text-dark fw-bold shadow-sm" style="color: #1e293b !important; background-color: #ffc107 !important; border-color: #ffc107 !important;"><i class="fa-solid fa-right-from-bracket me-1"></i> Deconectare</a>
+                        <form th:action="@{/web/auth/logout}" method="post" class="d-inline">
+                            <button type="submit" class="btn btn-warning btn-sm rounded-pill px-3 text-dark fw-bold shadow-sm" style="color: #1e293b !important; background-color: #ffc107 !important; border-color: #ffc107 !important;">
+                                <i class="fa-solid fa-right-from-bracket me-1"></i> Deconectare
+                            </button>
+                        </form>
                     </th:block>
                 </div>
             </div>

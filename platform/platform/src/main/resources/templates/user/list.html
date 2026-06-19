@@ -68,7 +68,7 @@
                                 </a>
                                 <a th:href="@{/web/admin/users/delete/{id}(id=${user.id})}" 
                                    class="btn btn-danger btn-sm px-3 rounded-pill text-white d-inline-flex align-items-center gap-1"
-                                   th:if="${session.currentUser != null && session.currentUser.id != user.id}"
+                                   th:if="${currentUser != null && currentUser.id != user.id}"
                                    onclick="return confirm('Sigur doriți să ștergeți acest utilizator? Această acțiune va șterge profilul și toate înrolările sau recenziile asociate.');">
                                     <i class="fa-solid fa-trash"></i>
                                     <span>Șterge</span>

@@ -10,7 +10,6 @@ import com.elearning.platform.mapper.CourseMapper;
 import com.elearning.platform.service.interf.CategoryService;
 import com.elearning.platform.service.interf.CourseService;
 import com.elearning.platform.service.interf.UserService;
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -22,6 +21,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -44,7 +44,7 @@ public class HomeController {
             @RequestParam(defaultValue = "title") String sortBy,
             @RequestParam(defaultValue = "asc") String sortDir,
             Model model,
-            HttpSession session) {
+            Principal principal) {
 
         List<Category> categories = categoryService.getAllCategories();
         List<CategoryResponseDto> categoryDtos = categories.stream()
@@ -80,12 +80,13 @@ public class HomeController {
         model.addAttribute("categoryId", categoryId);
 
         // Fetch enrolled course IDs if a user is logged in
-        User currentUser = (User) session.getAttribute("currentUser");
         List<Long> enrolledCourseIds = new ArrayList<>();
-        if (currentUser != null && currentUser.getRole().name().equals("USER")) {
+        if (principal != null) {
             try {
-                User freshUser = userService.getUserById(currentUser.getId());
-                enrolledCourseIds = freshUser.getCourses().stream().map(Course::getId).toList();
+                User currentUser = userService.getUserByEmail(principal.getName());
+                if (currentUser != null && currentUser.getRole().name().equals("USER")) {
+                    enrolledCourseIds = currentUser.getCourses().stream().map(Course::getId).toList();
+                }
             } catch (Exception e) {
                 // ignore
             }

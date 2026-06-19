@@ -35,12 +35,7 @@ public class UserAdminWebController {
             @RequestParam(defaultValue = "5") int size,
             @RequestParam(defaultValue = "username") String sortBy,
             @RequestParam(defaultValue = "asc") String sortDir,
-            Model model,
-            HttpSession session) {
-        User user = (User) session.getAttribute("currentUser");
-        if (user == null || !user.getRole().name().equals("ADMIN")) {
-            return "redirect:/web/auth/login";
-        }
+            Model model) {
 
         Sort sort = "coursesCount".equals(sortBy) 
                 ? Sort.unsorted() 
@@ -62,11 +57,7 @@ public class UserAdminWebController {
 
     // ADMIN: Show create form
     @GetMapping("/create")
-    public String showCreateForm(Model model, HttpSession session) {
-        User user = (User) session.getAttribute("currentUser");
-        if (user == null || !user.getRole().name().equals("ADMIN")) {
-            return "redirect:/web/auth/login";
-        }
+    public String showCreateForm(Model model) {
         model.addAttribute("user", new UserDto());
         model.addAttribute("roles", Role.values());
         return "user/form";
@@ -74,11 +65,7 @@ public class UserAdminWebController {
 
     // ADMIN: Show edit form
     @GetMapping("/edit/{id}")
-    public String showEditForm(@PathVariable Long id, Model model, HttpSession session) {
-        User user = (User) session.getAttribute("currentUser");
-        if (user == null || !user.getRole().name().equals("ADMIN")) {
-            return "redirect:/web/auth/login";
-        }
+    public String showEditForm(@PathVariable Long id, Model model) {
         User targetUser = userService.getUserById(id);
         UserDto userDto = userMapper.toUserDto(targetUser);
 
@@ -93,12 +80,7 @@ public class UserAdminWebController {
     public String saveUser(@Valid @ModelAttribute("user") UserDto userDto,
                            BindingResult bindingResult,
                            @RequestParam(required = false) Long userId,
-                           Model model,
-                           HttpSession session) {
-        User user = (User) session.getAttribute("currentUser");
-        if (user == null || !user.getRole().name().equals("ADMIN")) {
-            return "redirect:/web/auth/login";
-        }
+                           Model model) {
 
         boolean hasOtherErrors = false;
         if (bindingResult.hasErrors()) {
@@ -147,11 +129,8 @@ public class UserAdminWebController {
 
     // ADMIN: Delete user
     @GetMapping("/delete/{id}")
-    public String deleteUser(@PathVariable Long id, HttpSession session) {
-        User user = (User) session.getAttribute("currentUser");
-        if (user == null || !user.getRole().name().equals("ADMIN")) {
-            return "redirect:/web/auth/login";
-        }
+    public String deleteUser(@PathVariable Long id, java.security.Principal principal) {
+        User user = userService.getUserByEmail(principal.getName());
         
         // Prevent deleting oneself
         if (user.getId().equals(id)) {

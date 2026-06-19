@@ -13,6 +13,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Collections;
 import java.util.List;
@@ -26,6 +27,9 @@ class UserServiceImplTest {
 
     @Mock
     private UserRepository userRepository;
+
+    @Mock
+    private PasswordEncoder passwordEncoder;
 
     @InjectMocks
     private UserServiceImpl userService;
@@ -83,11 +87,13 @@ class UserServiceImplTest {
 
         when(userRepository.existsByEmail("new@email.com")).thenReturn(false);
         when(userRepository.existsByUsername("newuser")).thenReturn(false);
+        when(passwordEncoder.encode("pass")).thenReturn("pass_hashed");
         when(userRepository.save(any(User.class))).thenAnswer(invocation -> invocation.getArgument(0));
 
         User registered = userService.registerUser(user);
         assertNotNull(registered);
         assertEquals(Role.USER, registered.getRole());
+        assertEquals("pass_hashed", registered.getPassword());
     }
 
     @Test
@@ -116,10 +122,10 @@ class UserServiceImplTest {
     void testLogin_Success() {
         User user = new User();
         user.setEmail("test@email.com");
-        user.setPassword("password");
+        user.setPassword("pass_hashed");
 
         when(userRepository.findByEmail("test@email.com")).thenReturn(Optional.of(user));
-        when(userRepository.save(any(User.class))).thenAnswer(invocation -> invocation.getArgument(0));
+        when(passwordEncoder.matches("password", "pass_hashed")).thenReturn(true);
 
         User loggedIn = userService.login("test@email.com", "password");
         assertNotNull(loggedIn);
@@ -136,9 +142,10 @@ class UserServiceImplTest {
     void testLogin_InvalidPassword() {
         User user = new User();
         user.setEmail("test@email.com");
-        user.setPassword("password");
+        user.setPassword("pass_hashed");
 
         when(userRepository.findByEmail("test@email.com")).thenReturn(Optional.of(user));
+        when(passwordEncoder.matches("wrong", "pass_hashed")).thenReturn(false);
 
         assertThrows(UnauthorizedException.class, () -> userService.login("test@email.com", "wrong"));
     }
@@ -149,6 +156,7 @@ class UserServiceImplTest {
         existing.setId(1L);
         existing.setEmail("old@email.com");
         existing.setUsername("olduser");
+        existing.setPassword("oldpass_hashed");
 
         User updated = new User();
         updated.setEmail("new@email.com");
@@ -159,12 +167,14 @@ class UserServiceImplTest {
         when(userRepository.findById(1L)).thenReturn(Optional.of(existing));
         when(userRepository.existsByEmailAndIdNot("new@email.com", 1L)).thenReturn(false);
         when(userRepository.existsByUsernameAndIdNot("newuser", 1L)).thenReturn(false);
+        when(passwordEncoder.encode("newpass")).thenReturn("newpass_hashed");
         when(userRepository.save(any(User.class))).thenAnswer(invocation -> invocation.getArgument(0));
 
         User result = userService.updateUser(1L, updated);
         assertEquals("new@email.com", result.getEmail());
         assertEquals("newuser", result.getUsername());
         assertEquals(Role.ADMIN, result.getRole());
+        assertEquals("newpass_hashed", result.getPassword());
     }
 
     @Test
