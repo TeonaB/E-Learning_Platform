@@ -9,6 +9,8 @@ import com.elearning.platform.exception.UnauthorizedException;
 import com.elearning.platform.repository.UserRepository;
 import com.elearning.platform.service.interf.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -105,5 +107,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<Course> getUserCourses(Long userId) {
         return getUserById(userId).getCourses();
+    }
+
+    @Override
+    public Page<User> getUsersPaged(Pageable pageable, String sortBy, String sortDir) {
+        if ("coursesCount".equals(sortBy)) {
+            return "desc".equalsIgnoreCase(sortDir)
+                    ? userRepository.findAllSortedByCoursesCountDesc(pageable)
+                    : userRepository.findAllSortedByCoursesCountAsc(pageable);
+        }
+        return userRepository.findAll(pageable);
     }
 }

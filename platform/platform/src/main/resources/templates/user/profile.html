@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::main})}">
+<body>
+<main>
+    <div class="mb-4">
+        <h2 class="fw-bold text-primary"><i class="fa-solid fa-user-gear me-2"></i>Profilul Meu</h2>
+        <p class="text-secondary small">Vizualizați, actualizați sau ștergeți datele dvs. de profil</p>
+    </div>
+
+    <!-- Alert Displays -->
+    <div th:if="${successMessage}" class="alert alert-success py-2 mb-3" role="alert">
+        <i class="fa-solid fa-circle-check me-2"></i>
+        <span th:text="${successMessage}">Succes!</span>
+    </div>
+    <div th:if="${errorMessage}" class="alert alert-danger py-2 mb-3" role="alert">
+        <i class="fa-solid fa-circle-xmark me-2"></i>
+        <span th:text="${errorMessage}">Eroare!</span>
+    </div>
+
+    <div class="row g-4">
+        <!-- Left Side: Profile Info Summary -->
+        <div class="col-md-5">
+            <div class="card card-custom p-4 shadow-sm h-100">
+                <div class="text-center pb-3 border-bottom mb-3">
+                    <div class="avatar-placeholder bg-light text-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-2" 
+                         style="width: 80px; height: 80px; font-size: 2.5rem;">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                    <span class="badge bg-primary rounded-pill px-3" th:text="${session.currentUser.role}">USER</span>
+                </div>
+
+                <div class="mb-4">
+                    <h5 class="fw-bold text-secondary mb-3"><i class="fa-solid fa-address-card me-2"></i>Informații Profil</h5>
+                    <div th:if="${isNew}" class="text-center py-4 text-muted bg-light rounded">
+                        <i class="fa-solid fa-circle-info mb-2 text-warning fs-4"></i>
+                        <p class="small mb-0">Nu ați completat încă detaliile de profil. Completați formularul din dreapta pentru a le crea.</p>
+                    </div>
+                    <div th:if="${!isNew}">
+                        <div class="mb-3">
+                            <span class="text-muted d-block small">Prenume</span>
+                            <strong class="fs-5" th:text="${profile.firstName}">Prenume</strong>
+                        </div>
+                        <div class="mb-3">
+                            <span class="text-muted d-block small">Nume</span>
+                            <strong class="fs-5" th:text="${profile.lastName}">Nume</strong>
+                        </div>
+                        <div class="mb-3">
+                            <span class="text-muted d-block small">Număr Telefon</span>
+                            <strong class="fs-5" th:text="${profile.phoneNumber}">Telefon</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Delete Option (only if profile exists) -->
+                <div th:if="${!isNew}" class="mt-auto pt-3 border-top">
+                    <form th:action="@{/web/profile/delete}" method="post" 
+                          onclick="return confirm('Sigur doriți să vă ștergeți datele de profil? Contul de utilizator va rămâne activ.');">
+                        <button type="submit" class="btn btn-outline-danger w-100 rounded-pill">
+                            <i class="fa-solid fa-trash-can me-1"></i> Șterge Datele de Profil
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side: Create/Edit Form -->
+        <div class="col-md-7">
+            <div class="card card-custom p-4 shadow-sm h-100">
+                <h4 class="fw-bold text-primary mb-3">
+                    <span th:if="${isNew}"><i class="fa-solid fa-plus me-2"></i>Creează Profil</span>
+                    <span th:if="${!isNew}"><i class="fa-solid fa-user-pen me-2"></i>Editează Profil</span>
+                </h4>
+                <p class="text-secondary small mb-4">Introduceți datele dvs. de contact pentru a vă completa profilul de pe platformă.</p>
+
+                <form th:action="@{/web/profile/save}" th:object="${profile}" method="post">
+                    <!-- First Name -->
+                    <div class="mb-3">
+                        <label for="firstName" class="form-label fw-bold">Prenume</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fa-solid fa-user-tag"></i></span>
+                            <input type="text" class="form-control" id="firstName" th:field="*{firstName}" 
+                                   placeholder="Introduceți prenumele..." required>
+                        </div>
+                        <div class="text-danger small mt-1" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">
+                            Eroare prenume
+                        </div>
+                    </div>
+
+                    <!-- Last Name -->
+                    <div class="mb-3">
+                        <label for="lastName" class="form-label fw-bold">Nume</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fa-solid fa-user-tag"></i></span>
+                            <input type="text" class="form-control" id="lastName" th:field="*{lastName}" 
+                                   placeholder="Introduceți numele de familie..." required>
+                        </div>
+                        <div class="text-danger small mt-1" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">
+                            Eroare nume
+                        </div>
+                    </div>
+
+                    <!-- Phone Number -->
+                    <div class="mb-4">
+                        <label for="phoneNumber" class="form-label fw-bold">Număr Telefon</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fa-solid fa-phone"></i></span>
+                            <input type="text" class="form-control" id="phoneNumber" th:field="*{phoneNumber}" 
+                                   placeholder="Ex: 0722123456" required>
+                        </div>
+                        <div class="text-danger small mt-1" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}">
+                            Eroare număr telefon
+                        </div>
+                    </div>
+
+                    <!-- Submit and Cancel Buttons -->
+                    <div class="d-flex justify-content-end gap-2">
+                        <a th:href="@{/web/home}" class="btn btn-outline-secondary rounded-pill px-4">Anulează</a>
+                        <button type="submit" class="btn btn-primary rounded-pill px-4">
+                            <i class="fa-solid fa-floppy-disk me-1"></i> Salvează Profilul
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

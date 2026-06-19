@@ -4,10 +4,15 @@ import com.elearning.platform.domain.Role;
 import com.elearning.platform.domain.User;
 import com.elearning.platform.dto.UserDto;
 import com.elearning.platform.exception.BadRequestException;
+import com.elearning.platform.mapper.UserMapper;
 import com.elearning.platform.service.interf.UserService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,15 +26,37 @@ import java.util.List;
 public class UserAdminWebController {
 
     private final UserService userService;
+    private final UserMapper userMapper;
 
     // ADMIN: View users list
     @GetMapping
-    public String listUsers(Model model, HttpSession session) {
+    public String listUsers(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "5") int size,
+            @RequestParam(defaultValue = "username") String sortBy,
+            @RequestParam(defaultValue = "asc") String sortDir,
+            Model model,
+            HttpSession session) {
         User user = (User) session.getAttribute("currentUser");
         if (user == null || !user.getRole().name().equals("ADMIN")) {
             return "redirect:/web/auth/login";
         }
-        model.addAttribute("users", userService.getAllUsers());
+
+        Sort sort = "coursesCount".equals(sortBy) 
+                ? Sort.unsorted() 
+                : Sort.by(Sort.Direction.fromString(sortDir), sortBy);
+
+        Pageable pageable = PageRequest.of(page, size, sort);
+        Page<User> userPage = userService.getUsersPaged(pageable, sortBy, sortDir);
+
+        model.addAttribute("users", userPage.getContent());
+        model.addAttribute("currentPage", page);
+        model.addAttribute("pageSize", size);
+        model.addAttribute("totalPages", userPage.getTotalPages());
+        model.addAttribute("totalItems", userPage.getTotalElements());
+        model.addAttribute("sortBy", sortBy);
+        model.addAttribute("sortDir", sortDir);
+
         return "user/list";
     }
 
@@ -53,11 +80,7 @@ public class UserAdminWebController {
             return "redirect:/web/auth/login";
         }
         User targetUser = userService.getUserById(id);
-        UserDto userDto = new UserDto();
-        userDto.setUsername(targetUser.getUsername());
-        userDto.setEmail(targetUser.getEmail());
-        userDto.setPassword(targetUser.getPassword());
-        userDto.setRole(targetUser.getRole().name());
+        UserDto userDto = userMapper.toUserDto(targetUser);
 
         model.addAttribute("userId", id);
         model.addAttribute("user", userDto);
@@ -99,21 +122,10 @@ public class UserAdminWebController {
             return "user/form";
         }
 
-        User targetUser = new User();
-        targetUser.setUsername(userDto.getUsername());
-        targetUser.setEmail(userDto.getEmail());
-        
+        User targetUser = userMapper.toUser(userDto);
         if (userId != null && (userDto.getPassword() == null || userDto.getPassword().trim().isEmpty())) {
             User existingUser = userService.getUserById(userId);
             targetUser.setPassword(existingUser.getPassword());
-        } else {
-            targetUser.setPassword(userDto.getPassword());
-        }
-
-        try {
-            targetUser.setRole(Role.valueOf(userDto.getRole().toUpperCase().trim()));
-        } catch (Exception e) {
-            targetUser.setRole(Role.USER);
         }
 
         try {

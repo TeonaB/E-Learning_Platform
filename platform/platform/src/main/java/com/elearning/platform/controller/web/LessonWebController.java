@@ -4,6 +4,7 @@ import com.elearning.platform.domain.Course;
 import com.elearning.platform.domain.Lesson;
 import com.elearning.platform.domain.User;
 import com.elearning.platform.dto.LessonDto;
+import com.elearning.platform.mapper.LessonMapper;
 import com.elearning.platform.service.interf.CourseService;
 import com.elearning.platform.service.interf.LessonService;
 import com.elearning.platform.service.interf.UserService;
@@ -25,6 +26,7 @@ public class LessonWebController {
     private final LessonService lessonService;
     private final CourseService courseService;
     private final UserService userService;
+    private final LessonMapper lessonMapper;
 
     // Student/Admin: View lessons of a specific course
     @GetMapping("/courses/{courseId}/lessons")
@@ -73,10 +75,7 @@ public class LessonWebController {
         }
         
         Lesson lesson = lessonService.getLessonById(id);
-        LessonDto lessonDto = new LessonDto();
-        lessonDto.setTitle(lesson.getTitle());
-        lessonDto.setContentUrl(lesson.getContentUrl());
-        lessonDto.setDurationMinutes(lesson.getDurationMinutes());
+        LessonDto lessonDto = lessonMapper.toLessonDto(lesson);
         
         model.addAttribute("lessonId", id);
         model.addAttribute("lesson", lessonDto);
@@ -105,10 +104,7 @@ public class LessonWebController {
             return "lesson/form";
         }
 
-        Lesson lesson = new Lesson();
-        lesson.setTitle(lessonDto.getTitle());
-        lesson.setContentUrl(lessonDto.getContentUrl());
-        lesson.setDurationMinutes(lessonDto.getDurationMinutes());
+        Lesson lesson = lessonMapper.toLesson(lessonDto);
 
         if (lessonId != null) {
             lessonService.updateLesson(lessonId, lesson);

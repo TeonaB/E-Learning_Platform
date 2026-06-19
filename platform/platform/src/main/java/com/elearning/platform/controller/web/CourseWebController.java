@@ -4,6 +4,7 @@ import com.elearning.platform.domain.Category;
 import com.elearning.platform.domain.Course;
 import com.elearning.platform.domain.User;
 import com.elearning.platform.dto.CourseDto;
+import com.elearning.platform.mapper.CourseMapper;
 import com.elearning.platform.service.interf.CategoryService;
 import com.elearning.platform.service.interf.CourseService;
 import jakarta.servlet.http.HttpSession;
@@ -26,6 +27,7 @@ public class CourseWebController {
     private final CourseService courseService;
     private final CategoryService categoryService;
     private final UserService userService;
+    private final CourseMapper courseMapper;
 
     // ADMIN: View courses list
     @GetMapping("/admin/courses")
@@ -58,10 +60,7 @@ public class CourseWebController {
             return "redirect:/web/auth/login";
         }
         Course course = courseService.getCourseById(id);
-        CourseDto courseDto = new CourseDto();
-        courseDto.setTitle(course.getTitle());
-        courseDto.setDescription(course.getDescription());
-        courseDto.setCategoryId(course.getCategory().getId());
+        CourseDto courseDto = courseMapper.toCourseDto(course);
         
         model.addAttribute("courseId", id);
         model.addAttribute("course", courseDto);
@@ -89,15 +88,10 @@ public class CourseWebController {
             return "course/form";
         }
 
-        Course course = new Course();
+        Course course = courseMapper.toCourse(courseDto);
         if (courseId != null) {
             course.setId(courseId);
         }
-        course.setTitle(courseDto.getTitle());
-        course.setDescription(courseDto.getDescription());
-        Category category = new Category();
-        category.setId(courseDto.getCategoryId());
-        course.setCategory(category);
 
         if (courseId != null) {
             courseService.updateCourse(courseId, course);

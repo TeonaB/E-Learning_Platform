@@ -43,12 +43,43 @@
 
         <!-- Course Catalog Grid -->
         <div class="col-lg-9">
-            <div class="d-flex justify-content-between align-items-center mb-4">
+            <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
                 <h3 class="fw-bold mb-0">
                     <span th:if="${selectedCategory == null}">Toate Cursurile Disponibile</span>
                     <span th:if="${selectedCategory != null}" th:text="'Cursuri în categoria ' + ${selectedCategory.name}">Categorie Cursuri</span>
                 </h3>
-                <span class="badge bg-secondary px-3 py-2 text-wrap" th:text="${courses.size()} + ' cursuri găsite'">0 cursuri</span>
+                
+                <div class="d-flex align-items-center gap-2 flex-wrap">
+                    <!-- Page Size Selector -->
+                    <div class="d-flex align-items-center me-2">
+                        <label for="pageSizeSelect" class="me-1 mb-0 small text-secondary">Rânduri:</label>
+                        <select id="pageSizeSelect" class="form-select form-select-sm" style="width: auto;" onchange="changePageSize(this.value)">
+                            <option value="2" th:selected="${pageSize == 2}">2</option>
+                            <option value="4" th:selected="${pageSize == 4}">4</option>
+                            <option value="8" th:selected="${pageSize == 8}">8</option>
+                            <option value="12" th:selected="${pageSize == 12}">12</option>
+                        </select>
+                    </div>
+
+                    <!-- Sort Selector -->
+                    <div class="dropdown">
+                        <button class="btn btn-outline-primary btn-sm dropdown-toggle rounded-pill" type="button" id="sortMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-sort me-1"></i> Sortează după
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="sortMenuButton">
+                            <li><a class="dropdown-item" th:classappend="${sortBy == 'title' && sortDir == 'asc'} ? 'active' : ''" 
+                                   th:href="@{/web/home(categoryId=${categoryId}, page=0, size=${pageSize}, sortBy='title', sortDir='asc')}">Titlu (A-Z)</a></li>
+                            <li><a class="dropdown-item" th:classappend="${sortBy == 'title' && sortDir == 'desc'} ? 'active' : ''" 
+                                   th:href="@{/web/home(categoryId=${categoryId}, page=0, size=${pageSize}, sortBy='title', sortDir='desc')}">Titlu (Z-A)</a></li>
+                            <li><a class="dropdown-item" th:classappend="${sortBy == 'rating' && sortDir == 'desc'} ? 'active' : ''" 
+                                   th:href="@{/web/home(categoryId=${categoryId}, page=0, size=${pageSize}, sortBy='rating', sortDir='desc')}">Recenzie (Cea mai bună)</a></li>
+                            <li><a class="dropdown-item" th:classappend="${sortBy == 'rating' && sortDir == 'asc'} ? 'active' : ''" 
+                                   th:href="@{/web/home(categoryId=${categoryId}, page=0, size=${pageSize}, sortBy='rating', sortDir='asc')}">Recenzie (Cea mai slabă)</a></li>
+                        </ul>
+                    </div>
+
+                    <span class="badge bg-secondary px-3 py-2 text-wrap" th:text="${totalItems} + ' cursuri găsite'">0 cursuri</span>
+                </div>
             </div>
 
             <!-- Empty State -->
@@ -115,6 +146,34 @@
                     </div>
                 </th:block>
             </div>
+
+            <!-- Pagination Controls -->
+            <nav aria-label="Page navigation" class="mt-4" th:if="${totalPages > 1}">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item" th:classappend="${currentPage == 0} ? 'disabled'">
+                        <a class="page-link rounded-start-pill" th:href="@{/web/home(categoryId=${categoryId}, page=${currentPage - 1}, size=${pageSize}, sortBy=${sortBy}, sortDir=${sortDir})}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item" th:each="i : ${#numbers.sequence(0, totalPages - 1)}" th:classappend="${currentPage == i} ? 'active'">
+                        <a class="page-link" th:href="@{/web/home(categoryId=${categoryId}, page=${i}, size=${pageSize}, sortBy=${sortBy}, sortDir=${sortDir})}" th:text="${i + 1}">1</a>
+                    </li>
+                    <li class="page-item" th:classappend="${currentPage == totalPages - 1} ? 'disabled'">
+                        <a class="page-link rounded-end-pill" th:href="@{/web/home(categoryId=${categoryId}, page=${currentPage + 1}, size=${pageSize}, sortBy=${sortBy}, sortDir=${sortDir})}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <script th:inline="javascript">
+                function changePageSize(size) {
+                    const urlParams = new URLSearchParams(window.location.search);
+                    urlParams.set('size', size);
+                    urlParams.set('page', '0'); // reset la prima pagina
+                    window.location.search = urlParams.toString();
+                }
+            </script>
         </div>
     </div>
 </main>

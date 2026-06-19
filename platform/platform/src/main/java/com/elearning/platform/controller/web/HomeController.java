@@ -5,12 +5,17 @@ import com.elearning.platform.domain.Course;
 import com.elearning.platform.domain.User;
 import com.elearning.platform.dto.CategoryResponseDto;
 import com.elearning.platform.dto.CourseResponseDto;
-import com.elearning.platform.mapper.ResponseMapper;
+import com.elearning.platform.mapper.CategoryMapper;
+import com.elearning.platform.mapper.CourseMapper;
 import com.elearning.platform.service.interf.CategoryService;
 import com.elearning.platform.service.interf.CourseService;
 import com.elearning.platform.service.interf.UserService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,30 +33,51 @@ public class HomeController {
     private final CourseService courseService;
     private final CategoryService categoryService;
     private final UserService userService;
+    private final CategoryMapper categoryMapper;
+    private final CourseMapper courseMapper;
 
     @GetMapping("/home")
-    public String home(@RequestParam(required = false) Long categoryId, Model model, HttpSession session) {
+    public String home(
+            @RequestParam(required = false) Long categoryId,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "4") int size,
+            @RequestParam(defaultValue = "title") String sortBy,
+            @RequestParam(defaultValue = "asc") String sortDir,
+            Model model,
+            HttpSession session) {
+
         List<Category> categories = categoryService.getAllCategories();
         List<CategoryResponseDto> categoryDtos = categories.stream()
-                .map(ResponseMapper::toCategoryDto)
+                .map(categoryMapper::toCategoryResponseDto)
                 .toList();
         model.addAttribute("categories", categoryDtos);
 
-        List<Course> courses;
         if (categoryId != null) {
-            courses = courseService.getCoursesByCategory(categoryId);
-            categoryService.getAllCategories().stream()
+            categories.stream()
                     .filter(c -> c.getId().equals(categoryId))
                     .findFirst()
-                    .ifPresent(selected -> model.addAttribute("selectedCategory", ResponseMapper.toCategoryDto(selected)));
-        } else {
-            courses = courseService.getAllCourses();
+                    .ifPresent(selected -> model.addAttribute("selectedCategory", categoryMapper.toCategoryResponseDto(selected)));
         }
 
-        List<CourseResponseDto> courseDtos = courses.stream()
-                .map(ResponseMapper::toCourseDto)
+        Sort sort = "rating".equals(sortBy) 
+                ? Sort.unsorted() 
+                : Sort.by(Sort.Direction.fromString(sortDir), sortBy);
+
+        Pageable pageable = PageRequest.of(page, size, sort);
+        Page<Course> coursePage = courseService.getCoursesPaged(categoryId, pageable, sortBy, sortDir);
+
+        List<CourseResponseDto> courseDtos = coursePage.getContent().stream()
+                .map(courseMapper::toCourseResponseDto)
                 .toList();
+
         model.addAttribute("courses", courseDtos);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("pageSize", size);
+        model.addAttribute("totalPages", coursePage.getTotalPages());
+        model.addAttribute("totalItems", coursePage.getTotalElements());
+        model.addAttribute("sortBy", sortBy);
+        model.addAttribute("sortDir", sortDir);
+        model.addAttribute("categoryId", categoryId);
 
         // Fetch enrolled course IDs if a user is logged in
         User currentUser = (User) session.getAttribute("currentUser");

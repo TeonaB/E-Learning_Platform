@@ -5,6 +5,7 @@ import com.elearning.platform.domain.Review;
 import com.elearning.platform.domain.User;
 import com.elearning.platform.dto.ReviewDto;
 import com.elearning.platform.exception.BadRequestException;
+import com.elearning.platform.mapper.ReviewMapper;
 import com.elearning.platform.service.interf.CourseService;
 import com.elearning.platform.service.interf.ReviewService;
 import com.elearning.platform.service.interf.UserService;
@@ -26,6 +27,7 @@ public class ReviewWebController {
     private final ReviewService reviewService;
     private final CourseService courseService;
     private final UserService userService;
+    private final ReviewMapper reviewMapper;
 
     // USER: Show form to leave a review
     @GetMapping("/reviews/create/{courseId}")
@@ -69,9 +71,7 @@ public class ReviewWebController {
             return "review/form";
         }
 
-        Review review = new Review();
-        review.setRating(reviewDto.getRating());
-        review.setComment(reviewDto.getComment());
+        Review review = reviewMapper.toReview(reviewDto);
 
         try {
             if (reviewId != null) {
@@ -109,9 +109,7 @@ public class ReviewWebController {
             return "redirect:/web/home";
         }
 
-        ReviewDto reviewDto = new ReviewDto();
-        reviewDto.setRating(review.getRating());
-        reviewDto.setComment(review.getComment());
+        ReviewDto reviewDto = reviewMapper.toReviewDto(review);
 
         model.addAttribute("reviewId", id);
         model.addAttribute("review", reviewDto);

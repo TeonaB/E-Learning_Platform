@@ -1,65 +1,86 @@
 package com.elearning.platform.exception;
 
 import jakarta.validation.ConstraintViolationException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-
-import java.util.Collections;
-import java.util.Map;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 @ControllerAdvice
+@Slf4j
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<Map<String, String>> handleNotFound(ResourceNotFoundException ex) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                .body(Collections.singletonMap("error", ex.getMessage()));
+    public ModelAndView handleNotFound(ResourceNotFoundException ex) {
+        log.error("ResourceNotFoundException caught: {}", ex.getMessage());
+        ModelAndView mav = new ModelAndView("error/404");
+        mav.addObject("error", ex.getMessage());
+        return mav;
     }
 
     @ExceptionHandler(BadRequestException.class)
-    public ResponseEntity<Map<String, String>> handleBadRequest(BadRequestException ex) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(Collections.singletonMap("error", ex.getMessage()));
+    public ModelAndView handleBadRequest(BadRequestException ex) {
+        log.error("BadRequestException caught: {}", ex.getMessage());
+        ModelAndView mav = new ModelAndView("error/400");
+        mav.addObject("error", ex.getMessage());
+        return mav;
     }
 
     @ExceptionHandler(UnauthorizedException.class)
-    public ResponseEntity<Map<String, String>> handleUnauthorized(UnauthorizedException ex) {
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                .body(Collections.singletonMap("error", ex.getMessage()));
+    public ModelAndView handleUnauthorized(UnauthorizedException ex) {
+        log.error("UnauthorizedException caught: {}", ex.getMessage());
+        ModelAndView mav = new ModelAndView("error/400");
+        mav.addObject("error", ex.getMessage());
+        return mav;
+    }
+
+    @ExceptionHandler(NoResourceFoundException.class)
+    public ModelAndView handleNoResourceFound(NoResourceFoundException ex) {
+        log.warn("Static resource not found: {}", ex.getMessage());
+        ModelAndView mav = new ModelAndView("error/404");
+        mav.addObject("error", ex.getMessage());
+        return mav;
     }
 
     @ExceptionHandler(DataIntegrityViolationException.class)
-    public ResponseEntity<Map<String, String>> handleDataIntegrity(DataIntegrityViolationException ex) {
+    public ModelAndView handleDataIntegrity(DataIntegrityViolationException ex) {
+        log.error("DataIntegrityViolationException caught: ", ex);
+        ModelAndView mav = new ModelAndView("error/400");
         String message = ex.getRootCause() != null ? ex.getRootCause().getMessage() : ex.getMessage();
-        return ResponseEntity.status(HttpStatus.CONFLICT)
-                .body(Collections.singletonMap("error", "Database error: " + message));
+        mav.addObject("error", "Eroare bază de date: " + message);
+        return mav;
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<Map<String, String>> handleValidation(MethodArgumentNotValidException ex) {
+    public ModelAndView handleValidation(MethodArgumentNotValidException ex) {
+        log.error("MethodArgumentNotValidException caught: {}", ex.getMessage());
+        ModelAndView mav = new ModelAndView("error/400");
         String message = ex.getBindingResult().getFieldErrors().isEmpty()
-                ? "Validation failed"
+                ? "Validare eșuată"
                 : ex.getBindingResult().getFieldErrors().get(0).getDefaultMessage();
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(Collections.singletonMap("error", message));
+        mav.addObject("error", message);
+        return mav;
     }
 
     @ExceptionHandler(ConstraintViolationException.class)
-    public ResponseEntity<Map<String, String>> handleConstraintViolation(ConstraintViolationException ex) {
+    public ModelAndView handleConstraintViolation(ConstraintViolationException ex) {
+        log.error("ConstraintViolationException caught: {}", ex.getMessage());
+        ModelAndView mav = new ModelAndView("error/400");
         String message = ex.getConstraintViolations().isEmpty()
-                ? "Validation failed"
+                ? "Validare eșuată"
                 : ex.getConstraintViolations().iterator().next().getMessage();
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(Collections.singletonMap("error", message));
+        mav.addObject("error", message);
+        return mav;
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<Map<String, String>> handleOther(Exception ex) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(Collections.singletonMap("error", ex.getMessage()));
+    public ModelAndView handleOther(Exception ex) {
+        log.error("Unhandled exception caught: ", ex);
+        ModelAndView mav = new ModelAndView("error/500");
+        mav.addObject("error", ex.getMessage());
+        return mav;
     }
 }

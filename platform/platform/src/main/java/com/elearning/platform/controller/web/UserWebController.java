@@ -5,6 +5,7 @@ import com.elearning.platform.dto.LoginRequestDto;
 import com.elearning.platform.dto.UserDto;
 import com.elearning.platform.exception.BadRequestException;
 import com.elearning.platform.exception.UnauthorizedException;
+import com.elearning.platform.mapper.UserMapper;
 import com.elearning.platform.service.interf.UserService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserWebController {
 
     private final UserService userService;
+    private final UserMapper userMapper;
 
     @GetMapping("/login")
     public String showLoginForm(Model model) {
@@ -56,11 +58,7 @@ public class UserWebController {
             return "register";
         }
         try {
-            User user = new User();
-            user.setUsername(userDto.getUsername());
-            user.setEmail(userDto.getEmail());
-            user.setPassword(userDto.getPassword());
-            
+            User user = userMapper.toUser(userDto);
             User savedUser = userService.registerUser(user);
             session.setAttribute("currentUser", savedUser);
             return "redirect:/web/home";
