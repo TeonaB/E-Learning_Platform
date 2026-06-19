@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::main})}">
+<body>
+<main class="d-flex align-items-center justify-content-center py-5">
+    <div class="card card-custom p-4 shadow-sm" style="max-width: 450px; width: 100%;">
+        <div class="text-center mb-4">
+            <i class="fa-solid fa-circle-user text-primary" style="font-size: 3.5rem;"></i>
+            <h3 class="fw-bold mt-2 text-primary">Conectare Cont</h3>
+            <p class="text-secondary small">Introduceți datele de autentificare pentru a continua studiul</p>
+        </div>
+
+        <!-- General Login Error -->
+        <div th:if="${param.error}" class="alert alert-danger py-2" role="alert">
+            <i class="fa-solid fa-circle-xmark me-2"></i>
+            <span>Email sau parolă incorectă!</span>
+        </div>
+
+        <!-- Registration Success -->
+        <div th:if="${param.registered}" class="alert alert-success py-2" role="alert">
+            <i class="fa-solid fa-circle-check me-2"></i>
+            <span>Înregistrare reușită! Vă puteți conecta acum.</span>
+        </div>
+
+        <form th:action="@{/web/auth/login}" method="post">
+            <!-- Email -->
+            <div class="mb-3">
+                <label for="email" class="form-label fw-bold">Adresă de Email</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fa-solid fa-envelope text-muted"></i></span>
+                    <input type="email" class="form-control" id="email" name="email" 
+                           placeholder="exemplu@mail.com" required>
+                </div>
+            </div>
+
+            <!-- Password -->
+            <div class="mb-3">
+                <label for="password" class="form-label fw-bold">Parolă</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fa-solid fa-lock text-muted"></i></span>
+                    <input type="password" class="form-control" id="password" name="password" 
+                           placeholder="Parola ta" required>
+                </div>
+            </div>
+
+            <!-- Remember Me checkbox -->
+            <div class="mb-4 form-check">
+                <input type="checkbox" class="form-check-input" id="remember-me" name="remember-me">
+                <label class="form-check-label text-secondary small" for="remember-me">Ține-mă minte</label>
+            </div>
+
+            <!-- Submit -->
+            <button type="submit" class="btn btn-gradient w-100 py-2.5 rounded-pill mb-3">Conectare</button>
+            
+            <div class="text-center mt-3">
+                <span class="text-secondary small">Nu ai cont? </span>
+                <a th:href="@{/web/auth/register}" class="text-primary fw-bold small text-decoration-none">Înregistrează-te</a>
+            </div>
+        </form>
+    </div>
+</main>
+</body>
+</html>

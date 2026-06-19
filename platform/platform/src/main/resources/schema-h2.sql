@@ -1,3 +1,11 @@
+DROP TABLE IF EXISTS user_course;
+DROP TABLE IF EXISTS review;
+DROP TABLE IF EXISTS lesson;
+DROP TABLE IF EXISTS course;
+DROP TABLE IF EXISTS category;
+DROP TABLE IF EXISTS user_profile;
+DROP TABLE IF EXISTS app_user;
+
 -- 1. Tabela Users
 CREATE TABLE app_user (
                        id BIGINT AUTO_INCREMENT PRIMARY KEY,

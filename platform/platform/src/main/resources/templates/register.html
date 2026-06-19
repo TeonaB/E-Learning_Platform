@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::main})}">
+<body>
+<main class="d-flex align-items-center justify-content-center py-5">
+    <div class="card card-custom p-4 shadow-sm" style="max-width: 450px; width: 100%;">
+        <div class="text-center mb-4">
+            <i class="fa-solid fa-user-plus text-primary" style="font-size: 3.5rem;"></i>
+            <h3 class="fw-bold mt-2 text-primary">Cont Nou</h3>
+            <p class="text-secondary small">Creează-ți un cont pentru a debloca cursurile platformei</p>
+        </div>
+
+        <!-- General Registration Error -->
+        <div th:if="${registerError}" class="alert alert-danger py-2" role="alert">
+            <i class="fa-solid fa-circle-xmark me-2"></i>
+            <span th:text="${registerError}">Eroare</span>
+        </div>
+
+        <form th:action="@{/web/auth/register}" th:object="${user}" method="post">
+            <!-- Username -->
+            <div class="mb-3">
+                <label for="username" class="form-label fw-bold">Nume utilizator</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fa-solid fa-user text-muted"></i></span>
+                    <input type="text" class="form-control" id="username" th:field="*{username}" 
+                           placeholder="Ex: student123" required>
+                </div>
+                <div class="text-danger small mt-1" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">
+                    Username invalid
+                </div>
+            </div>
+
+            <!-- Email -->
+            <div class="mb-3">
+                <label for="email" class="form-label fw-bold">Adresă de Email</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fa-solid fa-envelope text-muted"></i></span>
+                    <input type="email" class="form-control" id="email" th:field="*{email}" 
+                           placeholder="exemplu@mail.com" required>
+                </div>
+                <div class="text-danger small mt-1" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">
+                    Email invalid
+                </div>
+            </div>
+
+            <!-- Password -->
+            <div class="mb-4">
+                <label for="password" class="form-label fw-bold">Parolă</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fa-solid fa-lock text-muted"></i></span>
+                    <input type="password" class="form-control" id="password" th:field="*{password}" 
+                           placeholder="Minim 6 caractere" required>
+                </div>
+                <div class="text-danger small mt-1" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">
+                    Parolă invalidă
+                </div>
+            </div>
+
+            <!-- Submit -->
+            <button type="submit" class="btn btn-gradient w-100 py-2.5 rounded-pill mb-3">Înregistrare</button>
+            
+            <div class="text-center mt-3">
+                <span class="text-secondary small">Ai deja cont? </span>
+                <a th:href="@{/web/auth/login}" class="text-primary fw-bold small text-decoration-none">Conectează-te</a>
+            </div>
+        </form>
+    </div>
+</main>
+</body>
+</html>

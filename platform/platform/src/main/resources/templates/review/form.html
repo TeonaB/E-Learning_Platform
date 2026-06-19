@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::main})}">
+<body>
+<main class="d-flex align-items-center justify-content-center">
+    <div class="card card-custom p-4 shadow-sm" style="max-width: 600px; width: 100%;">
+        <div class="mb-4 text-center">
+            <h3 class="fw-bold text-primary">
+                <span th:if="${reviewId == null}"><i class="fa-solid fa-star text-warning me-2"></i>Scrie o Recenzie</span>
+                <span th:if="${reviewId != null}"><i class="fa-solid fa-star text-warning me-2"></i>Editează Recenzia</span>
+            </h3>
+            <p class="text-secondary small">
+                Împărtășește-ți experiența despre cursul <strong th:text="${course.title}">Nume Curs</strong>
+            </p>
+        </div>
+
+        <!-- Custom Saving Error (e.g. duplicate review check in business logic) -->
+        <div th:if="${saveError}" class="alert alert-danger py-2" role="alert">
+            <i class="fa-solid fa-circle-xmark me-2"></i>
+            <span th:text="${saveError}">Eroare salvare recenzie</span>
+        </div>
+
+        <form th:action="@{/web/reviews/save/{courseId}(courseId=${course.id})}" th:object="${review}" method="post">
+            <input type="hidden" name="reviewId" th:value="${reviewId}" th:if="${reviewId != null}" />
+            
+            <!-- Rating Selection -->
+            <div class="mb-3">
+                <label for="rating" class="form-label fw-bold">Notă acordată cursului</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fa-solid fa-star text-warning"></i></span>
+                    <select class="form-select" id="rating" th:field="*{rating}" required>
+                        <option value="" disabled selected>Alege o notă de la 1 la 5...</option>
+                        <option value="5">5 ★★★★★ (Excelent)</option>
+                        <option value="4">4 ★★★★☆ (Foarte Bun)</option>
+                        <option value="3">3 ★★★☆☆ (Bun)</option>
+                        <option value="2">2 ★★☆☆☆ (Satisfăcător)</option>
+                        <option value="1">1 ★☆☆☆☆ (Dezamăgitor)</option>
+                    </select>
+                </div>
+                <div class="text-danger small mt-1" th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}">
+                    Vă rugăm să selectați o notă validă.
+                </div>
+            </div>
+
+            <!-- Comment Textarea -->
+            <div class="mb-4">
+                <label for="comment" class="form-label fw-bold">Comentariul tău (Opțional)</label>
+                <textarea class="form-control" id="comment" th:field="*{comment}" rows="4" 
+                          placeholder="Cum ți s-a părut conținutul cursului, ritmul de predare, resursele oferite?..."></textarea>
+                <div class="text-danger small mt-1" th:if="${#fields.hasErrors('comment')}" th:errors="*{comment}">
+                    Comentariul este invalid.
+                </div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="d-flex justify-content-end gap-2">
+                <a th:href="@{/web/courses/{courseId}/lessons(courseId=${course.id})}" class="btn btn-outline-secondary rounded-pill px-4">Anulează</a>
+                <button type="submit" class="btn btn-warning text-dark fw-bold rounded-pill px-4">
+                    <span th:if="${reviewId == null}">Trimite Recenzia</span>
+                    <span th:if="${reviewId != null}">Actualizează Recenzia</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</main>
+</body>
+</html>

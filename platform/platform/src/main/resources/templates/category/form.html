@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::main})}">
+<body>
+<main class="d-flex align-items-center justify-content-center">
+    <div class="card card-custom p-4 shadow-sm" style="max-width: 500px; width: 100%;">
+        <div class="mb-4">
+            <h3 class="fw-bold text-primary">
+                <span th:if="${categoryId == null}"><i class="fa-solid fa-plus me-2"></i>Adaugă Categorie</span>
+                <span th:if="${categoryId != null}"><i class="fa-solid fa-pen-to-square me-2"></i>Editează Categorie</span>
+            </h3>
+            <p class="text-secondary small">Introduceți denumirea și descrierea categoriei</p>
+        </div>
+
+        <!-- Custom Saving Error -->
+        <div th:if="${saveError}" class="alert alert-danger py-2" role="alert">
+            <i class="fa-solid fa-circle-xmark me-2"></i>
+            <span th:text="${saveError}">Eroare salvare</span>
+        </div>
+
+        <form th:action="@{/web/admin/categories/save}" th:object="${category}" method="post">
+            <!-- Hidden ID if editing -->
+            <input type="hidden" name="categoryId" th:value="${categoryId}" />
+
+            <!-- Name -->
+            <div class="mb-3">
+                <label for="name" class="form-label fw-bold">Denumire Categorie</label>
+                <input type="text" class="form-control" id="name" th:field="*{name}" 
+                       placeholder="Ex: Web Development, Design, etc." required>
+                <div class="text-danger small mt-1" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">
+                    Numele categoriei este obligatoriu.
+                </div>
+            </div>
+
+            <!-- Description -->
+            <div class="mb-4">
+                <label for="description" class="form-label fw-bold">Descriere Categorie</label>
+                <textarea class="form-control" id="description" th:field="*{description}" rows="4" 
+                          placeholder="Scurtă descriere a ariei de studiu..."></textarea>
+                <div class="text-danger small mt-1" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">
+                    Descrierea este invalidă.
+                </div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="d-flex justify-content-end gap-2">
+                <a th:href="@{/web/admin/categories}" class="btn btn-outline-secondary rounded-pill px-4">Anulează</a>
+                <button type="submit" class="btn btn-primary rounded-pill px-4">Salvează</button>
+            </div>
+        </form>
+    </div>
+</main>
+</body>
+</html>

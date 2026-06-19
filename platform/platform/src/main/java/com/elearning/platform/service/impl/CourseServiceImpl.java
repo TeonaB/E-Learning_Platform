@@ -9,6 +9,8 @@ import com.elearning.platform.repository.CourseRepository;
 import com.elearning.platform.repository.UserRepository;
 import com.elearning.platform.service.interf.CourseService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -88,5 +90,25 @@ public class CourseServiceImpl implements CourseService {
             courseRepository.save(course);
             userRepository.save(user);
         }
+    }
+
+    @Override
+    public Page<Course> getCoursesPaged(Long categoryId, Pageable pageable, String sortBy, String sortDir) {
+        if ("rating".equals(sortBy)) {
+            if (categoryId != null) {
+                return "desc".equalsIgnoreCase(sortDir)
+                        ? courseRepository.findByCategoryIdSortedByAverageRatingDesc(categoryId, pageable)
+                        : courseRepository.findByCategoryIdSortedByAverageRatingAsc(categoryId, pageable);
+            } else {
+                return "desc".equalsIgnoreCase(sortDir)
+                        ? courseRepository.findAllSortedByAverageRatingDesc(pageable)
+                        : courseRepository.findAllSortedByAverageRatingAsc(pageable);
+            }
+        }
+
+        if (categoryId != null) {
+            return courseRepository.findByCategoryId(categoryId, pageable);
+        }
+        return courseRepository.findAll(pageable);
     }
 }

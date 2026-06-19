@@ -8,6 +8,8 @@ import com.elearning.platform.repository.CategoryRepository;
 import com.elearning.platform.repository.CourseRepository;
 import com.elearning.platform.service.interf.CategoryService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -70,5 +72,15 @@ public class CategoryServiceImpl implements CategoryService {
         // ensure category exists
         getCategoryById(categoryId);
         return courseRepository.findByCategoryId(categoryId);
+    }
+
+    @Override
+    public Page<Category> getCategoriesPaged(Pageable pageable, String sortBy, String sortDir) {
+        if ("coursesCount".equals(sortBy)) {
+            return "desc".equalsIgnoreCase(sortDir)
+                    ? categoryRepository.findAllSortedByCoursesCountDesc(pageable)
+                    : categoryRepository.findAllSortedByCoursesCountAsc(pageable);
+        }
+        return categoryRepository.findAll(pageable);
     }
 }

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::main})}">
+<body>
+<main>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold mb-0 text-primary"><i class="fa-solid fa-list me-2"></i>Gestionare Categorii</h2>
+        <a th:href="@{/web/admin/categories/create}" class="btn btn-primary rounded-pill px-4">
+            <i class="fa-solid fa-plus me-1"></i> Adaugă Categorie Nouă
+        </a>
+    </div>
+
+    <div class="card card-custom p-4 shadow-sm" style="max-width: 900px; margin: 0 auto;">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th scope="col" style="width: 80px;">ID</th>
+                        <th scope="col">
+                            <a th:href="@{/web/admin/categories(page=${currentPage}, size=${pageSize}, sortBy='name', sortDir=${sortBy == 'name' && sortDir == 'asc' ? 'desc' : 'asc'})}" class="text-decoration-none text-dark d-flex align-items-center gap-1">
+                                Denumire
+                                <i th:if="${sortBy == 'name'}" class="fa-solid" th:classappend="${sortDir == 'asc'} ? 'fa-sort-up' : 'fa-sort-down'"></i>
+                                <i th:if="${sortBy != 'name'}" class="fa-solid fa-sort text-muted" style="font-size: 0.8rem;"></i>
+                            </a>
+                        </th>
+                        <th scope="col">Descriere</th>
+                        <th scope="col" class="text-center">
+                            <a th:href="@{/web/admin/categories(page=${currentPage}, size=${pageSize}, sortBy='coursesCount', sortDir=${sortBy == 'coursesCount' && sortDir == 'asc' ? 'desc' : 'asc'})}" class="text-decoration-none text-dark d-flex align-items-center justify-content-center gap-1">
+                                Cursuri
+                                <i th:if="${sortBy == 'coursesCount'}" class="fa-solid" th:classappend="${sortDir == 'asc'} ? 'fa-sort-up' : 'fa-sort-down'"></i>
+                                <i th:if="${sortBy != 'coursesCount'}" class="fa-solid fa-sort text-muted" style="font-size: 0.8rem;"></i>
+                            </a>
+                        </th>
+                        <th scope="col" style="width: 150px;" class="text-center">Opțiuni</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:if="${categories.isEmpty()}">
+                        <td colspan="5" class="text-center py-4 text-secondary">Nu există categorii introduse în platformă.</td>
+                    </tr>
+                    <tr th:each="cat : ${categories}">
+                        <td class="fw-bold" th:text="${cat.id}">1</td>
+                        <td class="fw-bold text-primary" th:text="${cat.name}">Web Development</td>
+                        <td class="text-secondary" th:text="${cat.description}">Category description...</td>
+                        <td class="text-center fw-bold text-secondary" th:text="${cat.courses.size()}">0</td>
+                        <td class="text-center">
+                            <div class="d-flex justify-content-center gap-2">
+                                <a th:href="@{/web/admin/categories/edit/{id}(id=${cat.id})}" 
+                                   class="btn btn-primary btn-sm px-3 rounded-pill text-white d-inline-flex align-items-center gap-1">
+                                     <i class="fa-solid fa-pen"></i>
+                                     <span>Editează</span>
+                                </a>
+                                <a th:href="@{/web/admin/categories/delete/{id}(id=${cat.id})}" 
+                                   class="btn btn-danger btn-sm px-3 rounded-pill text-white d-inline-flex align-items-center gap-1"
+                                   onclick="return confirm('Sigur doriți să ștergeți această categorie? Toate cursurile asociate vor fi șterse sau afectate.');">
+                                     <i class="fa-solid fa-trash"></i>
+                                     <span>Șterge</span>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pagination Controls -->
+        <div class="d-flex justify-content-between align-items-center mt-3 flex-wrap gap-2 pt-3 border-top">
+            <div class="d-flex align-items-center">
+                <label for="pageSizeSelect" class="me-2 mb-0 small text-secondary">Rânduri pe pagină:</label>
+                <select id="pageSizeSelect" class="form-select form-select-sm" style="width: auto;" onchange="changePageSize(this.value)">
+                    <option value="2" th:selected="${pageSize == 2}">2</option>
+                    <option value="5" th:selected="${pageSize == 5}">5</option>
+                    <option value="10" th:selected="${pageSize == 10}">10</option>
+                    <option value="20" th:selected="${pageSize == 20}">20</option>
+                </select>
+                <span class="ms-3 small text-secondary" th:text="'Total: ' + ${totalItems} + ' categorii'">Total: 0</span>
+            </div>
+
+            <nav aria-label="Page navigation" th:if="${totalPages > 1}" class="mb-0">
+                <ul class="pagination pagination-sm mb-0">
+                    <li class="page-item" th:classappend="${currentPage == 0} ? 'disabled'">
+                        <a class="page-link" th:href="@{/web/admin/categories(page=${currentPage - 1}, size=${pageSize}, sortBy=${sortBy}, sortDir=${sortDir})}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item" th:each="i : ${#numbers.sequence(0, totalPages - 1)}" th:classappend="${currentPage == i} ? 'active'">
+                        <a class="page-link" th:href="@{/web/admin/categories(page=${i}, size=${pageSize}, sortBy=${sortBy}, sortDir=${sortDir})}" th:text="${i + 1}">1</a>
+                    </li>
+                    <li class="page-item" th:classappend="${currentPage == totalPages - 1} ? 'disabled'">
+                        <a class="page-link" th:href="@{/web/admin/categories(page=${currentPage + 1}, size=${pageSize}, sortBy=${sortBy}, sortDir=${sortDir})}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <script th:inline="javascript">
+            function changePageSize(size) {
+                const urlParams = new URLSearchParams(window.location.search);
+                urlParams.set('size', size);
+                urlParams.set('page', '0'); // reset la prima pagina
+                window.location.search = urlParams.toString();
+            }
+        </script>
+    </div>
+</main>
+</body>
+</html>

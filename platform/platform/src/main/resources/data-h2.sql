@@ -1,8 +1,7 @@
-
 INSERT INTO app_user (username, email, password, role) VALUES
-                                                        ('admin', 'admin@elearning.com', 'admin123', 'ADMIN'),
-                                                        ('teona', 'teona@student.com', 'parola123', 'USER'),
-                                                        ('andrei', 'andrei@student.com', 'student456', 'USER');
+                                                        ('admin', 'admin@elearning.com', '$2a$10$Qg4u5nFpDKQgQZxXha58I.YbGPsUDdmtU3zQa0777St9l0LPk6KgC', 'ADMIN'),
+                                                        ('teona', 'teona@student.com', '$2a$10$pB0PEx.C5VWyvWXO8vmNHefJSTbJmnfapMoX7OWRw3VwG.tjsjTa2', 'USER'),
+                                                        ('andrei', 'andrei@student.com', '$2a$10$xAnB0jthUOI3tl4Y3vxhleYBojFxAJoHMyGfHdST3r3t9uoLzr6Zq', 'USER');
 
 
 INSERT INTO user_profile (user_id, first_name, last_name, phone_number) VALUES
