@@ -184,3 +184,35 @@ org.springframework.security.core.userdetails.UsernameNotFoundException: User no
 2026-06-20 01:36:49 [http-nio-8080-exec-3] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
 2026-06-20 01:36:53 [http-nio-8080-exec-5] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
 2026-06-20 01:36:56 [http-nio-8080-exec-7] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 11:24:20 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-20 11:24:26 [main] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-06-20 11:24:31 [main] ERROR c.e.platform.aspect.LoggingAspect - AOP Business Exception in UserProfileServiceImpl.getProfileByUserId() after 5 ms. Message: Profile not found for user id 7
+2026-06-20 11:24:31 [main] ERROR c.e.platform.aspect.LoggingAspect - AOP Business Exception in UserProfileServiceImpl.getProfileByUserId() after 2 ms. Message: Profile not found for user id 7
+2026-06-20 11:24:33 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-20 11:24:33 [main] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-06-20 11:25:06 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-20 11:25:09 [main] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-06-20 11:26:12 [http-nio-8080-exec-10] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 11:26:22 [http-nio-8080-exec-8] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 11:27:00 [http-nio-8080-exec-2] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 11:27:23 [http-nio-8080-exec-10] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 11:27:48 [http-nio-8080-exec-9] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 11:28:04 [http-nio-8080-exec-2] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 11:28:29 [http-nio-8080-exec-3] ERROR c.e.platform.aspect.LoggingAspect - AOP Business Exception in UserServiceImpl.registerUser() after 42 ms. Message: Email already exists
+2026-06-20 11:28:29 [http-nio-8080-exec-5] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 11:29:13 [http-nio-8080-exec-7] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 11:29:53 [http-nio-8080-exec-2] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 11:30:06 [http-nio-8080-exec-1] ERROR c.e.platform.aspect.LoggingAspect - AOP Business Exception in UserProfileServiceImpl.getProfileByUserId() after 16 ms. Message: Profile not found for user id 4
+2026-06-20 11:30:06 [http-nio-8080-exec-3] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 11:30:15 [http-nio-8080-exec-9] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 11:30:21 [http-nio-8080-exec-1] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 11:30:24 [http-nio-8080-exec-5] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 11:31:29 [http-nio-8080-exec-2] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 11:31:56 [http-nio-8080-exec-5] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 11:34:50 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-20 11:34:56 [main] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-06-20 11:35:12 [http-nio-8080-exec-4] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 11:35:36 [http-nio-8080-exec-2] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 11:35:43 [http-nio-8080-exec-3] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 11:36:05 [http-nio-8080-exec-8] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
+2026-06-20 11:36:11 [http-nio-8080-exec-4] WARN  c.e.p.e.GlobalExceptionHandler - Static resource not found: No static resource favicon.ico for request '/favicon.ico'.
