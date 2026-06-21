@@ -18,46 +18,67 @@ import java.util.Arrays;
 public class LoggingAspect {
 
     /**
+     * Prag (in milisecunde) peste care o metoda de serviciu este considerata lenta
+     * si este logata la nivel WARN pentru analiza de performanta.
+     */
+    private static final long SLOW_EXECUTION_THRESHOLD_MS = 500;
+
+    /**
      * Definește pointcut-ul care vizează toate metodele din clasele aflate în pachetul de servicii
      */
     @Pointcut("within(com.elearning.platform.service.impl..*)")
     public void serviceMethodsPointcut() {}
 
     /**
-     * Interceptează apelurile, loghează argumentele la intrare, valoarea returnată la ieșire și timpul de execuție.
-     * Dacă se aruncă o excepție gravă, este logată ca ERROR, iar cele de business ca WARN.
+     * Interceptează apelurile, loghează argumentele și timpul de execuție.
+     * Logarea pe DEBUG este protejată prin isDebugEnabled() pentru a evita construirea
+     * inutilă a string-urilor pe hot path când nivelul nu este activ.
+     * Excepțiile de business sunt logate ca WARN, iar cele grave ca ERROR.
      */
     @Around("serviceMethodsPointcut()")
     public Object logAround(ProceedingJoinPoint joinPoint) throws Throwable {
         String className = joinPoint.getTarget().getClass().getSimpleName();
         String methodName = joinPoint.getSignature().getName();
-        Object[] args = joinPoint.getArgs();
 
-        // Logare intrare la nivel DEBUG
-        log.debug("AOP Entry: {}.{}() with arguments = {}", className, methodName, Arrays.toString(args));
+        // Construim reprezentarea argumentelor doar dacă DEBUG este activ
+        if (log.isDebugEnabled()) {
+            log.debug("AOP Entry: {}.{}() with arguments = {}",
+                    className, methodName, Arrays.toString(joinPoint.getArgs()));
+        }
 
-        long start = System.currentTimeMillis();
+        long start = System.nanoTime();
         try {
             Object result = joinPoint.proceed();
-            long elapsedTime = System.currentTimeMillis() - start;
-            
-            // Logare ieșire cu succes la nivel DEBUG
-            log.debug("AOP Exit: {}.{}() executed in {} ms. Returned = {}", className, methodName, elapsedTime, result);
+            long elapsedMs = (System.nanoTime() - start) / 1_000_000;
+
+            // Semnalare executie lenta la nivel WARN
+            if (elapsedMs > SLOW_EXECUTION_THRESHOLD_MS) {
+                log.warn("AOP Slow execution: {}.{}() took {} ms (threshold {} ms)",
+                        className, methodName, elapsedMs, SLOW_EXECUTION_THRESHOLD_MS);
+            }
+
+            if (log.isDebugEnabled()) {
+                log.debug("AOP Exit: {}.{}() executed in {} ms. Returned = {}",
+                        className, methodName, elapsedMs, result);
+            }
             return result;
         } catch (ResourceNotFoundException | BadRequestException | UnauthorizedException e) {
-            long elapsedTime = System.currentTimeMillis() - start;
-            // Logare excepție de business la nivel ERROR (fără stack trace)
-            log.error("AOP Business Exception in {}.{}() after {} ms. Message: {}", className, methodName, elapsedTime, e.getMessage());
+            long elapsedMs = (System.nanoTime() - start) / 1_000_000;
+            // Logare excepție de business la nivel WARN (fără stack trace)
+            log.warn("AOP Business Exception in {}.{}() after {} ms. Message: {}",
+                    className, methodName, elapsedMs, e.getMessage());
             throw e;
         } catch (IllegalArgumentException e) {
-            long elapsedTime = System.currentTimeMillis() - start;
+            long elapsedMs = (System.nanoTime() - start) / 1_000_000;
             // Logare argumente invalide la nivel ERROR (fără stack trace)
-            log.error("AOP Illegal argument in {}.{}() after {} ms. Arguments = {}, Message: {}", className, methodName, elapsedTime, Arrays.toString(args), e.getMessage());
+            log.error("AOP Illegal argument in {}.{}() after {} ms. Arguments = {}, Message: {}",
+                    className, methodName, elapsedMs, Arrays.toString(joinPoint.getArgs()), e.getMessage());
             throw e;
         } catch (Throwable e) {
-            long elapsedTime = System.currentTimeMillis() - start;
-            // Logare excepție gravă la nivel ERROR (cu stack trace sau doar mesaj, conform log.error)
-            log.error("AOP Exception in {}.{}() after {} ms. Message: {}", className, methodName, elapsedTime, e.getMessage(), e);
+            long elapsedMs = (System.nanoTime() - start) / 1_000_000;
+            // Logare excepție gravă la nivel ERROR (cu stack trace)
+            log.error("AOP Exception in {}.{}() after {} ms. Message: {}",
+                    className, methodName, elapsedMs, e.getMessage(), e);
             throw e;
         }
     }
